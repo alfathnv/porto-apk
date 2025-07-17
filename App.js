@@ -16,22 +16,23 @@ import {
   Portal,
   Modal,
   TextInput,
-  useTheme
+  MD3DarkTheme
 } from 'react-native-paper';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const [visible, setVisible] = React.useState(false);
   const [text, setText] = React.useState('');
+  const theme = MD3DarkTheme;
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
   return (
     <SafeAreaProvider>
-      <PaperProvider>
-        <SafeAreaView style={{ flex: 1 }}>
-          <StatusBar style="auto" />
+      <PaperProvider theme={theme}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
+          <StatusBar style="light" />
           
           {/* App Bar */}
           <Appbar.Header>
@@ -67,13 +68,13 @@ export default function App() {
               <Card.Content>
                 <View style={{ gap: 8, marginBottom: 8 }}>
                   <Button mode="contained" onPress={() => {}}>
-                    Contained Button
+                    Contained Buttons
                   </Button>
                   <Button mode="outlined" onPress={() => {}}>
-                    Outlined Button
+                    Outlined Buttons
                   </Button>
                   <Button mode="text" onPress={() => {}}>
-                    Text Button
+                    Text Buttons
                   </Button>
                   <Button mode="contained-tonal" onPress={() => {}}>
                     Tonal Button
@@ -198,7 +199,7 @@ export default function App() {
           {/* Modal */}
           <Portal>
             <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={{
-              backgroundColor: 'white',
+              backgroundColor: theme.colors.background,
               padding: 20,
               margin: 20,
               borderRadius: 8,
