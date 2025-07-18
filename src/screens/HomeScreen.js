@@ -136,16 +136,6 @@ const HomeRoute = ({ onLogout }) => (
   </ScrollView>
 );
 
-const SocialsRoute = () => (
-  <SocialScreen />
-);
-
-const ProfileRoute = () => (
-  <View style={styles.content}>
-    <Text style={styles.title}>Profile Page (Coming Soon)</Text>
-  </View>
-);
-
 const HomeScreen = ({ onLogout }) => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
