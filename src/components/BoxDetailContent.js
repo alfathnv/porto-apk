@@ -16,14 +16,13 @@ const BoxDetailContent = ({ image, description }) => (
 const styles = StyleSheet.create({
   outerContainer: {
     width: '100%',
-    paddingHorizontal: 24,
     alignItems: 'center',
   },
   container: {
     flexDirection: 'column',
     width: '100%',
     alignItems: 'center',
-    marginVertical: 8,
+    paddingBottom: 16
   },
   image: {
     width: '100%',

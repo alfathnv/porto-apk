@@ -1,33 +1,43 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import BoxDetailContent from '../components/BoxDetailContent';
-import { assetMap } from '../datas/contentList';
+import { dataContent, assetMap } from '../datas/contentList';
 
-const ContentDetailScreen = ({ route, navigation }) => {
-  const { id, title, subtitle } = route.params;
+const ContentDetailScreen = ({ route }) => {
+  const { id } = route.params;
+  const content = dataContent.find(item => item.id === id);
 
-  useEffect(() => {
-    if (title && subtitle) {
-      navigation.setOptions({ title: `${title} - ${subtitle}` });
-    }
-  }, [navigation, title, subtitle]);
+  if (!content) return null;
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContent}>
-      <BoxDetailContent
-        image={assetMap['assemblr_metaverse_2.png']}
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, eu consectetur nisl nisi euismod nisi."
-      />
+    <ScrollView
+      style={{ backgroundColor: '#222323' }}
+      contentContainerStyle={styles.scrollContent}
+    >
+      <View style={styles.content}>
+        {content.children && content.children.map((child, idx) => (
+          <BoxDetailContent
+            key={idx}
+            image={assetMap[child.image]}
+            description={child.description}
+          />
+        ))}
+      </View>
+      
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   scrollContent: {
-    paddingTop: 24,
-    paddingBottom: 32,
-    backgroundColor: '#18191a',
+    backgroundColor: '#222323',
     minHeight: '100%',
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
   },
 });
 
