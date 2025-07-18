@@ -5,24 +5,28 @@ import { Text } from 'react-native-paper';
 const BoxDetailContent = ({ image, description, onImagePress }) => (
   <View style={styles.outerContainer}>
     <View style={styles.container}>
-        <TouchableOpacity onPress={onImagePress} activeOpacity={0.8} style={styles.imageContainer}>
-          <Image
-            source={image}
-            style={styles.fullImage}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.textContainer}>
-        {description ? <Text style={styles.description}>{description}</Text> : null}
-      </View>
+      <TouchableOpacity onPress={onImagePress} activeOpacity={0.8} style={styles.imageContainer}>
+        <Image
+          source={image}
+          style={styles.fullImage}
+          resizeMode="contain"
+        />
+        {description ? (
+          <View style={styles.overlayTextContainer} pointerEvents="none">
+            <Text style={styles.description}>{description}</Text>
+          </View>
+        ) : null}
+      </TouchableOpacity>
+    </View>
   </View>
 );
 
 const styles = StyleSheet.create({
   imageContainer: {
     width: '100%',
-    height: '90%',
+    height: '100%',
+    position: 'relative',
+    justifyContent: 'flex-end',
   },
   fullImage: {
     width: '100%',
@@ -37,10 +41,14 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-  textContainer: {
-    width: '100%',
-    paddingVertical: 12,
-    backgroundColor: 'transparent',
+  overlayTextContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 36,
+    backgroundColor: 'rgba(20,20,20,0.7)',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
     alignItems: 'flex-start',
   },
   description: {
