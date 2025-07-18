@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, ScrollView, Pressable, Animated } from 'react-native';
 import { Appbar, Title, Button, BottomNavigation, Text } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SocialScreen from './SocialScreen';
 import { useRef } from 'react';
@@ -158,9 +157,9 @@ const HomeScreen = ({ onLogout }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {renderScene({ route: routes[index] })}
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -177,7 +176,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    justifyContent: 'center',
   },
   title: {
     color: '#ffffff',
