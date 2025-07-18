@@ -5,6 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SocialScreen from './SocialScreen';
 import { useRef } from 'react';
+import landingImg from '../../assets/landing.png';
+import BlurredPressableBox from '../components/BlurredPressableBox';
 
 const AnimatedPressableBox = ({ image, title, subtitle }) => {
   const animBox = useRef(new Animated.Value(0)).current; // for scale/opacity
@@ -112,6 +114,9 @@ const HomeRoute = ({ onLogout }) => (
       <AnimatedPressableBox image={require('../../assets/porto/agra_sigi_1.png')} title="Agranara" subtitle="SIGI Mandiri" />
       <AnimatedPressableBox image={require('../../assets/porto/agate_gebyar_1.jpg')} title="Agate" subtitle="Gebyar BCA" />
       <AnimatedPressableBox image={require('../../assets/porto/agate_deus_1.png')} title="Agate" subtitle="DEUS HOAFL" />
+      <BlurredPressableBox image={require('../../assets/porto/agate_cpcm_1.png')} title="Agate" subtitle="CPCM MooGotchi" />
+      <BlurredPressableBox image={require('../../assets/porto/agate_pistachio_1.png')} title="Agate" subtitle="MVP Pistachio" />
+      <Image source={landingImg} style={styles.landingImageInScroll} />
     </View>
   </ScrollView>
 );
@@ -283,6 +288,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.5)',
     borderRadius: 8,
     zIndex: 1,
+  },
+  landingImageInScroll: {
+    width: '100%',
+    height: 120,
+    resizeMode: 'contain',
+    marginTop: 24,
+    alignSelf: 'center',
+  },
+  devLabel: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 8,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    paddingHorizontal: 12,
+    paddingVertical: 2,
+    borderRadius: 8,
+    overflow: 'hidden',
   },
 });
 
