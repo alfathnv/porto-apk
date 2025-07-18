@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
-  ScrollView,
+  FlatList,
+  Dimensions,
   Modal,
   Image,
   Pressable,
 } from 'react-native';
 import BoxDetailContent from '../components/BoxDetailContent';
 import { dataContent, assetMap } from '../datas/contentList';
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const ContentDetailScreen = ({ route }) => {
   const { id } = route.params;
@@ -18,7 +21,6 @@ const ContentDetailScreen = ({ route }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const openModal = (image) => {
-    console.log('Gambar dipilih:', image); // Debug log
     setSelectedImage(image);
     setModalVisible(true);
   };
@@ -28,28 +30,31 @@ const ContentDetailScreen = ({ route }) => {
     setSelectedImage(null);
   };
 
-  if (!content) return null;
+  if (!content || !content.children) return null;
 
   return (
-    <>
-      <ScrollView
-        style={{ backgroundColor: '#222323' }}
-        contentContainerStyle={styles.scrollContent}
-      >
-        <View style={styles.content}>
-          {content.children &&
-            content.children.map((child, idx) => (
-              <BoxDetailContent
-                key={idx}
-                image={assetMap[child.image]}
-                description={child.description}
-                onImagePress={() => openModal(assetMap[child.image])}
-              />
-            ))}
-        </View>
-      </ScrollView>
+    <View style={{ backgroundColor: '#222323' }}>
+      <FlatList
+        data={content.children}
+        keyExtractor={(_, idx) => idx.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.page}>
+            <BoxDetailContent
+              image={assetMap[item.image]}
+              description={item.description}
+              onImagePress={() => openModal(assetMap[item.image])}
+            />
+          </View>
+        )}
+        pagingEnabled
+        snapToInterval={SCREEN_HEIGHT}
+        decelerationRate="fast"
+        showsVerticalScrollIndicator={false}
+        snapToAlignment="start"
+        contentContainerStyle={{ backgroundColor: '#222323' }}
+      />
 
-      <Modal visible={modalVisible} transparent={true}>
+      <Modal visible={modalVisible} transparent={true} >
         <Pressable style={styles.modalContainer} onPress={closeModal}>
           {selectedImage && (
             <Image
@@ -60,18 +65,16 @@ const ContentDetailScreen = ({ route }) => {
           )}
         </Pressable>
       </Modal>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollContent: {
-    backgroundColor: '#222323',
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'flex-start',
+  page: {
+    height: SCREEN_HEIGHT,
+    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#222323',
     padding: 24,
   },
   modalContainer: {
@@ -79,6 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.95)',
     justifyContent: 'center',
     alignItems: 'center',
+
   },
   fullImage: {
     width: '90%',
