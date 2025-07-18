@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Appbar, Title, Button, BottomNavigation, Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import SocialScreen from './SocialScreen';
 
 const HomeRoute = ({ onLogout }) => (
   <View style={styles.content}>
@@ -18,9 +19,7 @@ const HomeRoute = ({ onLogout }) => (
 );
 
 const SocialsRoute = () => (
-  <View style={styles.content}>
-    <Text style={styles.title}>Socials Page (Coming Soon)</Text>
-  </View>
+  <SocialScreen />
 );
 
 const ProfileRoute = () => (
@@ -92,6 +91,18 @@ const styles = StyleSheet.create({
   },
   bottomBar: {
     backgroundColor: '#2a2b2b',
+  },
+  socialBox: {
+    backgroundColor: '#2a2b2b',
+    borderRadius: 12,
+    padding: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
   },
 });
 
