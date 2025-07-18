@@ -48,7 +48,11 @@ const dataContent = [
     path: "agate_astra_1.png",
     released: true,
     children: [
-      { image: "agate_astra_1.png", description: "Deskripsi untuk Astra Virtueverse 1." }
+      { image: "agate_astra_1.png", description: "Deskripsi untuk Astra Virtueverse 1." },
+      { image: "agate_astra_2.png", description: "Deskripsi untuk Astra Virtueverse 2." },
+      { image: "agate_astra_3.png", description: "Deskripsi untuk Astra Virtueverse 3." },
+      { image: "agate_astra_4.png", description: "Deskripsi untuk Astra Virtueverse 4." },
+      { image: "agate_astra_5.png", description: "Deskripsi untuk Astra Virtueverse 5." }
     ]
   },
   {
@@ -113,36 +117,48 @@ const dataContent = [
 ];
 
 const assetMap = {
-  "assemblr_metaverse_1.jpg": require('../../assets/porto/assemblr_metaverse_1.jpg'),
-  "assemblr_metaverse_2.png": require('../../assets/porto/assemblr_metaverse_2.png'),
-  "assemblr_metaverse_3.png": require('../../assets/porto/assemblr_metaverse_3.png'),
-  "assemblr_metaverse_4.png": require('../../assets/porto/assemblr_metaverse_4.png'),
-  "assemblr_studio_1.jpg": require('../../assets/porto/assemblr_studio_1.jpg'),
-  "assemblr_studio_2.jpg": require('../../assets/porto/assemblr_studio_2.jpg'),
-  "assemblr_studio_3.jpg": require('../../assets/porto/assemblr_studio_3.jpg'),
-  "assemblr_studio_4.jpg": require('../../assets/porto/assemblr_studio_4.jpg'),
-  "assemblr_studio_5.jpg": require('../../assets/porto/assemblr_studio_5.jpg'),
+  "agate_astra_1.png": require('../../assets/porto/agate_astra_1.png'),
+  "agate_astra_2.png": require('../../assets/porto/agate_astra_2.png'),
+  "agate_astra_3.png": require('../../assets/porto/agate_astra_3.png'),
+  "agate_astra_4.png": require('../../assets/porto/agate_astra_4.png'),
+  "agate_astra_5.png": require('../../assets/porto/agate_astra_5.png'),
+
+  "agate_cpcm_1.png": require('../../assets/porto/agate_cpcm_1.png'),
+
+  "agate_deus_1.png": require('../../assets/porto/agate_deus_1.png'),
+  "agate_deus_2.png": require('../../assets/porto/agate_deus_2.png'),
+  "agate_deus_3.png": require('../../assets/porto/agate_deus_3.png'),
+
+  "agate_gebyar_1.jpg": require('../../assets/porto/agate_gebyar_1.jpg'),
+  "agate_gebyar_2.png": require('../../assets/porto/agate_gebyar_2.png'),
+  "agate_gebyar_3.png": require('../../assets/porto/agate_gebyar_3.png'),
+  "agate_gebyar_4.png": require('../../assets/porto/agate_gebyar_4.png'),
+
+  "agate_pistachio_1.png": require('../../assets/porto/agate_pistachio_1.png'),
+
+  "agra_sigi_1.png": require('../../assets/porto/agra_sigi_1.png'),
+  "agra_sigi_2.png": require('../../assets/porto/agra_sigi_2.png'),
+  "agra_sigi_3.png": require('../../assets/porto/agra_sigi_3.png'),
+  "agra_sigi_4.png": require('../../assets/porto/agra_sigi_4.png'),
+  "agra_sigi_5.png": require('../../assets/porto/agra_sigi_5.png'),
+
   "agra_wais_1.png": require('../../assets/porto/agra_wais_1.png'),
   "agra_wais_2.png": require('../../assets/porto/agra_wais_2.png'),
   "agra_wais_3.png": require('../../assets/porto/agra_wais_3.png'),
   "agra_wais_4.png": require('../../assets/porto/agra_wais_4.png'),
   "agra_wais_5.png": require('../../assets/porto/agra_wais_5.png'),
   "agra_wais_6.png": require('../../assets/porto/agra_wais_6.png'),
-  "agate_astra_1.png": require('../../assets/porto/agate_astra_1.png'),
-  "agra_sigi_1.png": require('../../assets/porto/agra_sigi_1.png'),
-  "agra_sigi_2.png": require('../../assets/porto/agra_sigi_2.png'),
-  "agra_sigi_3.png": require('../../assets/porto/agra_sigi_3.png'),
-  "agra_sigi_4.png": require('../../assets/porto/agra_sigi_4.png'),
-  "agra_sigi_5.png": require('../../assets/porto/agra_sigi_5.png'),
-  "agate_gebyar_1.jpg": require('../../assets/porto/agate_gebyar_1.jpg'),
-  "agate_gebyar_2.png": require('../../assets/porto/agate_gebyar_2.png'),
-  "agate_gebyar_3.png": require('../../assets/porto/agate_gebyar_3.png'),
-  "agate_gebyar_4.png": require('../../assets/porto/agate_gebyar_4.png'),
-  "agate_deus_1.png": require('../../assets/porto/agate_deus_1.png'),
-  "agate_deus_2.png": require('../../assets/porto/agate_deus_2.png'),
-  "agate_deus_3.png": require('../../assets/porto/agate_deus_3.png'),
-  "agate_cpcm_1.png": require('../../assets/porto/agate_cpcm_1.png'),
-  "agate_pistachio_1.png": require('../../assets/porto/agate_pistachio_1.png'),
+
+  "assemblr_metaverse_1.jpg": require('../../assets/porto/assemblr_metaverse_1.jpg'),
+  "assemblr_metaverse_2.png": require('../../assets/porto/assemblr_metaverse_2.png'),
+  "assemblr_metaverse_3.png": require('../../assets/porto/assemblr_metaverse_3.png'),
+  "assemblr_metaverse_4.png": require('../../assets/porto/assemblr_metaverse_4.png'),
+
+  "assemblr_studio_1.jpg": require('../../assets/porto/assemblr_studio_1.jpg'),
+  "assemblr_studio_2.jpg": require('../../assets/porto/assemblr_studio_2.jpg'),
+  "assemblr_studio_3.jpg": require('../../assets/porto/assemblr_studio_3.jpg'),
+  "assemblr_studio_4.jpg": require('../../assets/porto/assemblr_studio_4.jpg'),
+  "assemblr_studio_5.jpg": require('../../assets/porto/assemblr_studio_5.jpg'),
 };
 
 export { dataContent, assetMap }; 

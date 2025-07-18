@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 
-const BoxDetailContent = ({ image, description }) => (
+const BoxDetailContent = ({ image, description, onImagePress }) => (
   <View style={styles.outerContainer}>
     <View style={styles.container}>
-      <Image source={image} style={styles.image} resizeMode="cover" />
+      <TouchableOpacity onPress={onImagePress} activeOpacity={0.8} style={styles.image}>
+        <Image source={image} style={styles.image} resizeMode="cover" />
+      </TouchableOpacity>
       <View style={styles.textContainer}>
         {description ? <Text style={styles.description}>{description}</Text> : null}
       </View>
@@ -25,8 +27,8 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   image: {
-    width: '100%',
-    height: 220,
+    width: "100%",
+    height: 200,
     borderRadius: 8,
     resizeMode: 'cover',
   },
