@@ -20,6 +20,8 @@ const ContentDetailScreen = ({ route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
+  const [layoutHeight, setLayoutHeight] = useState(SCREEN_HEIGHT); // dynamically measured height
+
   const openModal = (image) => {
     setSelectedImage(image);
     setModalVisible(true);
@@ -33,28 +35,39 @@ const ContentDetailScreen = ({ route }) => {
   if (!content || !content.children) return null;
 
   return (
-    <View style={{ backgroundColor: '#222323' }}>
+    <>
       <FlatList
         data={content.children}
         keyExtractor={(_, idx) => idx.toString()}
+        onLayout={(e) => {
+          const height = e.nativeEvent.layout.height;
+          setLayoutHeight(height);
+        }}
         renderItem={({ item }) => (
-          <View style={styles.page}>
-            <BoxDetailContent
-              image={assetMap[item.image]}
-              description={item.description}
-              onImagePress={() => openModal(assetMap[item.image])}
-            />
+          <View style={[styles.page, { height: layoutHeight }]}>
+            <View style={styles.innerContentWrapper}>
+              <BoxDetailContent
+                image={assetMap[item.image]}
+                description={item.description}
+                onImagePress={() => openModal(assetMap[item.image])}
+              />
+            </View>
           </View>
         )}
         pagingEnabled
-        snapToInterval={SCREEN_HEIGHT}
+        snapToInterval={layoutHeight}
+        getItemLayout={(_, index) => ({
+          length: layoutHeight,
+          offset: layoutHeight * index,
+          index,
+        })}
         decelerationRate="fast"
         showsVerticalScrollIndicator={false}
         snapToAlignment="start"
-        contentContainerStyle={{ backgroundColor: '#222323' }}
+        style={{ backgroundColor: '#222323' }} // Important: use style, not contentContainerStyle
       />
 
-      <Modal visible={modalVisible} transparent={true} >
+      <Modal visible={modalVisible} transparent>
         <Pressable style={styles.modalContainer} onPress={closeModal}>
           {selectedImage && (
             <Image
@@ -65,24 +78,28 @@ const ContentDetailScreen = ({ route }) => {
           )}
         </Pressable>
       </Modal>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   page: {
-    height: SCREEN_HEIGHT,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#222323',
-    padding: 24,
+    paddingHorizontal: 24,
+  },
+  innerContentWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
   modalContainer: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.95)',
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   fullImage: {
     width: '90%',

@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     width: '100%',
-    paddingHorizontal: 16,
     paddingVertical: 12,
     backgroundColor: 'transparent',
     alignItems: 'flex-start',
