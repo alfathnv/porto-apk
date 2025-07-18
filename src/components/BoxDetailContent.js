@@ -5,7 +5,7 @@ import { Text } from 'react-native-paper';
 const BoxDetailContent = ({ image, description }) => (
   <View style={styles.outerContainer}>
     <View style={styles.container}>
-      <Image source={image} style={styles.image} resizeMode="stretch" />
+      <Image source={image} style={styles.image} resizeMode="cover" />
       <View style={styles.textContainer}>
         {description ? <Text style={styles.description}>{description}</Text> : null}
       </View>
@@ -22,12 +22,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     alignItems: 'center',
-    paddingBottom: 16
+    paddingBottom: 16,
   },
   image: {
     width: '100%',
-    height: 180,
-    borderRadius: 16,
+    height: 220,
+    borderRadius: 8,
+    resizeMode: 'cover',
   },
   textContainer: {
     width: '100%',
