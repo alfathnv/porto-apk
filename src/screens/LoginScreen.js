@@ -3,27 +3,30 @@ import { View, KeyboardAvoidingView, Platform, Alert, Image } from 'react-native
 import {
   TextInput,
   Button,
+  Title,
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+const getRandomInt = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 const LoginScreen = ({ onLogin }) => {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [num1] = React.useState(getRandomInt(1, 10));
+  const [num2] = React.useState(getRandomInt(1, 10));
+  const [answer, setAnswer] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
   const handleLogin = () => {
     setLoading(true);
-    
-    // Simulate API call delay
     setTimeout(() => {
-      // Check credentials
-      if (username === 'admin' && password === '123456') {
+      if (parseInt(answer, 10) === num1 + num2) {
         onLogin();
       } else {
-        Alert.alert('Login Failed', 'Invalid username or password');
+        Alert.alert('Login Failed', 'Incorrect answer. Please try again.');
       }
       setLoading(false);
-    }, 1000);
+    }, 500);
   };
 
   return (
@@ -33,34 +36,27 @@ const LoginScreen = ({ onLogin }) => {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <View style={{ flex: 1, flexDirection: 'column' }}>
-          {/* Top 30%: Logo */}
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          </View>
-          {/* Middle 50%: Form */}
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ flex: 1}} />
+
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               source={require('../../assets/logo.png')}
-              style={{ width: 160, height: 160, resizeMode: 'contain', marginBottom: 40 }}
+              style={{ width: 160, height: 160, resizeMode: 'contain', marginBottom: 0 }}
             />
+          </View>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <View style={{ width: '100%', maxWidth: 400, alignItems: 'center', paddingHorizontal: 32 }}>
+              <Title style={{ color: '#fff', marginBottom: 16, fontSize: 20 }}>
+                {num1} + {num2} = ?
+              </Title>
               <TextInput
-                label="Username"
-                value={username}
-                onChangeText={setUsername}
+                label="Insert the answer"
+                value={answer}
+                onChangeText={setAnswer}
                 mode="outlined"
-                autoCapitalize="none"
-                style={{ width: '100%', marginBottom: 16 }}
-                left={<TextInput.Icon icon="account" />}
-                theme={{ colors: { primary: '#90caf9' } }}
-              />
-              <TextInput
-                label="Password"
-                value={password}
-                onChangeText={setPassword}
-                mode="outlined"
-                secureTextEntry
+                keyboardType="numeric"
                 style={{ width: '100%', marginBottom: 24 }}
-                left={<TextInput.Icon icon="lock" />}
+                left={<TextInput.Icon icon="calculator" />}
                 theme={{ colors: { primary: '#90caf9' } }}
               />
               <Button
@@ -76,7 +72,6 @@ const LoginScreen = ({ onLogin }) => {
               </Button>
             </View>
           </View>
-          {/* Bottom 20%: Spacer */}
           <View style={{ flex: 1.5 }} />
         </View>
       </KeyboardAvoidingView>
