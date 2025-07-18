@@ -1,49 +1,137 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import {
-  Provider as PaperProvider,
-  MD3DarkTheme,
-} from 'react-native-paper';
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Provider as PaperProvider, MD3DarkTheme } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LoginScreen from './src/screens/LoginScreen';
 import HomeScreen from './src/screens/HomeScreen';
+import ContentDetailScreen from './src/screens/ContentDetailScreen';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import SocialsScreen from './src/screens/SocialScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { IconButton } from 'react-native-paper';
+import LoginScreen from './src/screens/LoginScreen';
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const customDarkTheme = {
+  ...MD3DarkTheme,
+  colors: {
+    ...MD3DarkTheme.colors,
+    background: '#222323',
+    surface: '#2a2b2b',
+    surfaceVariant: '#323333',
+    onSurface: '#f0f6f0',
+    onSurfaceVariant: '#f0f6f0',
+    primary: '#90caf9',
+    onPrimary: '#1976d2',
+    outline: '#424242',
+  },
+};
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  
-  // Custom dark theme with #222323 background
-  const customDarkTheme = {
-    ...MD3DarkTheme,
-    colors: {
-      ...MD3DarkTheme.colors,
-      background: '#222323',
-      surface: '#2a2b2b',
-      surfaceVariant: '#323333',
-      onSurface: '#f0f6f0',
-      onSurfaceVariant: '#f0f6f0',
-      primary: '#90caf9',
-      onPrimary: '#1976d2',
-      outline: '#424242',
-    },
-  };
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true); // default true agar HomeScreen tampil
+  const handleLogout = () => setIsLoggedIn(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
+  function HomeStack({ handleLogout }) {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: '#2a2b2b' },
+          headerTintColor: '#fff',
+          headerTitleStyle: { fontWeight: 'bold' },
+        }}
+      >
+        <Stack.Screen
+          name="HomeScreen"
+          options={{
+            title: 'Home',
+            headerRight: () => (
+              <IconButton
+                icon="logout"
+                color="#fff"
+                size={24}
+                onPress={handleLogout}
+                style={{ marginRight: 8 }}
+              />
+            ),
+          }}
+        >
+          {props => <HomeScreen {...props} onLogout={handleLogout} />}
+        </Stack.Screen>
+        <Stack.Screen name="ContentDetail" component={ContentDetailScreen} options={{ title: 'Detail' }} />
+      </Stack.Navigator>
+    );
+  }
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
+  function SocialsStack() {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: '#2a2b2b' },
+          headerTintColor: '#fff',
+          headerTitleStyle: { fontWeight: 'bold' },
+        }}
+      >
+        <Stack.Screen name="SocialsScreen" component={SocialsScreen} options={{ title: 'Socials' }} />
+      </Stack.Navigator>
+    );
+  }
+
+  function ProfileStack() {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: '#2a2b2b' },
+          headerTintColor: '#fff',
+          headerTitleStyle: { fontWeight: 'bold' },
+        }}
+      >
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{ title: 'Profile' }} />
+      </Stack.Navigator>
+    );
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <SafeAreaProvider>
+        <PaperProvider theme={customDarkTheme}>
+          <LoginScreen onLogin={() => setIsLoggedIn(true)} />
+        </PaperProvider>
+      </SafeAreaProvider>
+    );
+  }
 
   return (
     <SafeAreaProvider>
       <PaperProvider theme={customDarkTheme}>
-        <StatusBar style="light" />
-        {isLoggedIn ? (
-          <HomeScreen onLogout={handleLogout} />
-        ) : (
-          <LoginScreen onLogin={handleLogin} />
-        )}
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              headerShown: false,
+              tabBarStyle: { backgroundColor: '#2a2b2b', borderTopColor: '#232323' },
+              tabBarActiveTintColor: '#90caf9',
+              tabBarInactiveTintColor: '#888',
+              tabBarIcon: ({ color, size, focused }) => {
+                let iconName;
+                if (route.name === 'HomeTab') iconName = 'home-variant';
+                else if (route.name === 'SocialsTab') iconName = 'web';
+                else if (route.name === 'ProfileTab') iconName = 'account';
+                else iconName = 'help';
+                return <MaterialCommunityIcons name={iconName} color={color} size={size} />;
+              },
+            })}
+          >
+            <Tab.Screen name="HomeTab">
+              {() => <HomeStack handleLogout={handleLogout} />}
+            </Tab.Screen>
+            <Tab.Screen name="SocialsTab" component={SocialsStack} options={{ title: 'Socials' }} />
+            <Tab.Screen name="ProfileTab" component={ProfileStack} options={{ title: 'Profile' }} />
+          </Tab.Navigator>
+        </NavigationContainer>
       </PaperProvider>
     </SafeAreaProvider>
   );

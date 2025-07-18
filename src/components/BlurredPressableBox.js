@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
 import { View, Animated, Pressable, StyleSheet, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const BlurredPressableBox = ({ image, title, subtitle, devLabel = 'Coming Soon' }) => {
+const BlurredPressableBox = ({ image, title, subtitle, devLabel = 'Coming Soon', id, disableNavigate = false }) => {
+  const navigation = useNavigation();
   const animBox = useRef(new Animated.Value(0)).current;
   const animFont = useRef(new Animated.Value(0)).current;
 
@@ -52,6 +54,11 @@ const BlurredPressableBox = ({ image, title, subtitle, devLabel = 'Coming Soon' 
       style={styles.contentBox}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
+      onPress={() => {
+        if (!disableNavigate) {
+          navigation.navigate('ContentDetail', { id, title, subtitle });
+        }
+      }}
     >
       <Animated.View style={{ flex: 1, width: '100%', height: '100%', transform: [{ scale }] }}>
         <Animated.Image source={image} style={[styles.contentImage, { opacity: imageOpacity }]} blurRadius={3} />

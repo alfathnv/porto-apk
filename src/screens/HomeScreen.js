@@ -7,8 +7,10 @@ import SocialScreen from './SocialScreen';
 import { useRef } from 'react';
 import landingImg from '../../assets/landing.png';
 import BlurredPressableBox from '../components/BlurredPressableBox';
+import { useNavigation } from '@react-navigation/native';
 
-const AnimatedPressableBox = ({ image, title, subtitle }) => {
+const AnimatedPressableBox = ({ image, title, subtitle, id }) => {
+  const navigation = useNavigation();
   const animBox = useRef(new Animated.Value(0)).current; // for scale/opacity
   const animFont = useRef(new Animated.Value(0)).current; // for fontSize/color
 
@@ -59,6 +61,7 @@ const AnimatedPressableBox = ({ image, title, subtitle }) => {
       style={styles.contentBox}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
+      onPress={() => navigation.navigate('ContentDetail', { id, title, subtitle })}
     >
       <Animated.View style={{ flex: 1, width: '100%', height: '100%', transform: [{ scale }] }}>
         <Animated.Image source={image} style={[styles.contentImage, { opacity: imageOpacity }]} />
@@ -107,15 +110,15 @@ const AnimatedPressableBox = ({ image, title, subtitle }) => {
 const HomeRoute = ({ onLogout }) => (
   <ScrollView contentContainerStyle={styles.scrollContent}>
     <View style={styles.content}>
-      <AnimatedPressableBox image={require('../../assets/porto/assemblr_metaverse_1.jpg')} title="Assemblr" subtitle="Metaverse" />
-      <AnimatedPressableBox image={require('../../assets/porto/assemblr_studio_1.jpg')} title="Assemblr" subtitle="Studio" />
-      <AnimatedPressableBox image={require('../../assets/porto/agra_wais_1.png')} title="Agranara" subtitle="WAIS BSI" />
-      <AnimatedPressableBox image={require('../../assets/porto/agate_astra_1.png')} title="Agate" subtitle="Astra Virtueverse" />
-      <AnimatedPressableBox image={require('../../assets/porto/agra_sigi_1.png')} title="Agranara" subtitle="SIGI Mandiri" />
-      <AnimatedPressableBox image={require('../../assets/porto/agate_gebyar_1.jpg')} title="Agate" subtitle="Gebyar BCA" />
-      <AnimatedPressableBox image={require('../../assets/porto/agate_deus_1.png')} title="Agate" subtitle="DEUS HOAFL" />
-      <BlurredPressableBox image={require('../../assets/porto/agate_cpcm_1.png')} title="Agate" subtitle="CPCM MooGotchi" />
-      <BlurredPressableBox image={require('../../assets/porto/agate_pistachio_1.png')} title="Agate" subtitle="MVP Pistachio" />
+      <AnimatedPressableBox image={require('../../assets/porto/assemblr_metaverse_1.jpg')} title="Assemblr" subtitle="Metaverse" id={1} />
+      <AnimatedPressableBox image={require('../../assets/porto/assemblr_studio_1.jpg')} title="Assemblr" subtitle="Studio" id={2} />
+      <AnimatedPressableBox image={require('../../assets/porto/agra_wais_1.png')} title="Agranara" subtitle="WAIS BSI" id={3} />
+      <AnimatedPressableBox image={require('../../assets/porto/agate_astra_1.png')} title="Agate" subtitle="Astra Virtueverse" id={4} />
+      <AnimatedPressableBox image={require('../../assets/porto/agra_sigi_1.png')} title="Agranara" subtitle="SIGI Mandiri" id={5} />
+      <AnimatedPressableBox image={require('../../assets/porto/agate_gebyar_1.jpg')} title="Agate" subtitle="Gebyar BCA" id={6} />
+      <AnimatedPressableBox image={require('../../assets/porto/agate_deus_1.png')} title="Agate" subtitle="DEUS HOAFL" id={7} />
+      <BlurredPressableBox image={require('../../assets/porto/agate_cpcm_1.png')} title="Agate" subtitle="CPCM MooGotchi" id={8} disableNavigate={true} />
+      <BlurredPressableBox image={require('../../assets/porto/agate_pistachio_1.png')} title="Agate" subtitle="MVP Pistachio" id={9} disableNavigate={true} />
       <Image source={landingImg} style={styles.landingImageInScroll} />
     </View>
   </ScrollView>
@@ -154,20 +157,7 @@ const HomeScreen = ({ onLogout }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Appbar.Header>
-        <Appbar.Content title="Home" subtitle="Welcome to the app" />
-        <Appbar.Action icon="logout" onPress={onLogout} />
-      </Appbar.Header>
-      <BottomNavigation
-        navigationState={{ index, routes }}
-        onIndexChange={setIndex}
-        renderScene={renderScene}
-        barStyle={styles.bottomBar}
-        sceneAnimationEnabled={false}
-        renderIcon={({ route, color }) => (
-          <MaterialCommunityIcons name={route.icon} color={color} size={24} />
-        )}
-      />
+      {renderScene({ route: routes[index] })}
     </SafeAreaView>
   );
 };

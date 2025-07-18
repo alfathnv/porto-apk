@@ -3,7 +3,7 @@ import { View, StyleSheet, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const SocialScreen = () => (
+const ProfileScreen = () => (
   <View style={styles.socialsGrid}>
     <View style={styles.socialsRow}>
       <View style={styles.socialSquare}>
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SocialScreen; 
+export default ProfileScreen; 
