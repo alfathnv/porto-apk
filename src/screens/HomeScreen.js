@@ -1,21 +1,119 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, Pressable, Animated } from 'react-native';
 import { Appbar, Title, Button, BottomNavigation, Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SocialScreen from './SocialScreen';
+import { useRef } from 'react';
+
+const AnimatedPressableBox = ({ image, title, subtitle }) => {
+  const animBox = useRef(new Animated.Value(0)).current; // for scale/opacity
+  const animFont = useRef(new Animated.Value(0)).current; // for fontSize/color
+
+  const handlePressIn = () => {
+    Animated.parallel([
+      Animated.timing(animBox, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animFont, {
+        toValue: 1,
+        duration: 60,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  };
+  const handlePressOut = () => {
+    Animated.parallel([
+      Animated.timing(animBox, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animFont, {
+        toValue: 0,
+        duration: 60,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  };
+
+  const overlayOpacity = animBox.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 0.25],
+  });
+  const imageOpacity = animBox.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0.5, 0.6],
+  });
+  const scale = animBox.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 1.04],
+  });
+
+  return (
+    <Pressable
+      style={styles.contentBox}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+    >
+      <Animated.View style={{ flex: 1, width: '100%', height: '100%', transform: [{ scale }] }}>
+        <Animated.Image source={image} style={[styles.contentImage, { opacity: imageOpacity }]} />
+        <Animated.View style={[styles.brightOverlay, { opacity: overlayOpacity }]} />
+        <View style={styles.overlayTextContainer}>
+          <Animated.Text
+            style={[
+              styles.overlayTitle,
+              {
+                color: animFont.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ['#fff', '#fff'],
+                }),
+                fontSize: animFont.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [22, 26],
+                }),
+              },
+            ]}
+          >
+            {title}
+          </Animated.Text>
+          <Animated.Text
+            style={[
+              styles.overlaySubtitle,
+              {
+                color: animFont.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ['#fff', '#fff'],
+                }),
+                fontSize: animFont.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [16, 19],
+                }),
+              },
+            ]}
+          >
+            {subtitle}
+          </Animated.Text>
+        </View>
+      </Animated.View>
+    </Pressable>
+  );
+};
 
 const HomeRoute = ({ onLogout }) => (
-  <View style={styles.content}>
-    <Title style={styles.title}>Welcome to Home Page</Title>
-    <Button 
-      mode="outlined" 
-      onPress={onLogout}
-      style={styles.logoutButton}
-    >
-      Logout
-    </Button>
-  </View>
+  <ScrollView contentContainerStyle={styles.scrollContent}>
+    <View style={styles.content}>
+      <AnimatedPressableBox image={require('../../assets/porto/assemblr_metaverse_1.jpg')} title="Assemblr" subtitle="Metaverse" />
+      <AnimatedPressableBox image={require('../../assets/porto/assemblr_studio_1.jpg')} title="Assemblr" subtitle="Studio" />
+      <AnimatedPressableBox image={require('../../assets/porto/agra_wais_1.png')} title="Agranara" subtitle="WAIS BSI" />
+      <AnimatedPressableBox image={require('../../assets/porto/agate_astra_1.png')} title="Agate" subtitle="Astra Virtueverse" />
+      <AnimatedPressableBox image={require('../../assets/porto/agra_sigi_1.png')} title="Agranara" subtitle="SIGI Mandiri" />
+      <AnimatedPressableBox image={require('../../assets/porto/agate_gebyar_1.jpg')} title="Agate" subtitle="Gebyar BCA" />
+      <AnimatedPressableBox image={require('../../assets/porto/agate_deus_1.png')} title="Agate" subtitle="DEUS HOAFL" />
+    </View>
+  </ScrollView>
 );
 
 const SocialsRoute = () => (
@@ -80,6 +178,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 24,
   },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
   title: {
     color: '#ffffff',
     marginBottom: 32,
@@ -103,6 +205,84 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 5,
+  },
+  contentBox: {
+    width: '100%',
+    height: 160,
+    backgroundColor: '#2a2b2b',
+    borderRadius: 12,
+    marginBottom: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  contentText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  contentImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+    resizeMode: 'cover',
+  },
+  overlayText: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    zIndex: 2,
+    display: 'flex',
+  },
+  overlayTextContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 2,
+    display: 'flex',
+  },
+  overlayTitle: {
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textShadowColor: 'rgba(0,0,0,0.8)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 6,
+  },
+  overlaySubtitle: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '500',
+    textAlign: 'center',
+    marginTop: 2,
+    textShadowColor: 'rgba(0,0,0,0.8)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 6,
+  },
+  brightOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    borderRadius: 8,
+    zIndex: 1,
   },
 });
 
