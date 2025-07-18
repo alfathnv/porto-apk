@@ -8,6 +8,7 @@ import { useRef } from 'react';
 import landingImg from '../../assets/landing.png';
 import BlurredPressableBox from '../components/BlurredPressableBox';
 import { useNavigation } from '@react-navigation/native';
+import { dataContent, assetMap } from '../datas/contentList';
 
 const AnimatedPressableBox = ({ image, title, subtitle, id }) => {
   const navigation = useNavigation();
@@ -110,15 +111,26 @@ const AnimatedPressableBox = ({ image, title, subtitle, id }) => {
 const HomeRoute = ({ onLogout }) => (
   <ScrollView contentContainerStyle={styles.scrollContent}>
     <View style={styles.content}>
-      <AnimatedPressableBox image={require('../../assets/porto/assemblr_metaverse_1.jpg')} title="Assemblr" subtitle="Metaverse" id={1} />
-      <AnimatedPressableBox image={require('../../assets/porto/assemblr_studio_1.jpg')} title="Assemblr" subtitle="Studio" id={2} />
-      <AnimatedPressableBox image={require('../../assets/porto/agra_wais_1.png')} title="Agranara" subtitle="WAIS BSI" id={3} />
-      <AnimatedPressableBox image={require('../../assets/porto/agate_astra_1.png')} title="Agate" subtitle="Astra Virtueverse" id={4} />
-      <AnimatedPressableBox image={require('../../assets/porto/agra_sigi_1.png')} title="Agranara" subtitle="SIGI Mandiri" id={5} />
-      <AnimatedPressableBox image={require('../../assets/porto/agate_gebyar_1.jpg')} title="Agate" subtitle="Gebyar BCA" id={6} />
-      <AnimatedPressableBox image={require('../../assets/porto/agate_deus_1.png')} title="Agate" subtitle="DEUS HOAFL" id={7} />
-      <BlurredPressableBox image={require('../../assets/porto/agate_cpcm_1.png')} title="Agate" subtitle="CPCM MooGotchi" id={8} disableNavigate={true} />
-      <BlurredPressableBox image={require('../../assets/porto/agate_pistachio_1.png')} title="Agate" subtitle="MVP Pistachio" id={9} disableNavigate={true} />
+      {dataContent.map((item) =>
+        item.released ? (
+          <AnimatedPressableBox
+            key={item.id}
+            image={assetMap[item.path]}
+            title={item.title}
+            subtitle={item.subtitle}
+            id={item.id}
+          />
+        ) : (
+          <BlurredPressableBox
+            key={item.id}
+            image={assetMap[item.path]}
+            title={item.title}
+            subtitle={item.subtitle}
+            id={item.id}
+            disableNavigate={true}
+          />
+        )
+      )}
       <Image source={landingImg} style={styles.landingImageInScroll} />
     </View>
   </ScrollView>
