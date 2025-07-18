@@ -66,11 +66,16 @@ const dataContent = [
 
 const assetMap = {
   "assemblr_metaverse_1.jpg": require('../../assets/porto/assemblr_metaverse_1.jpg'),
+  "assemblr_metaverse_2.png": require('../../assets/porto/assemblr_metaverse_2.png'),
   "assemblr_studio_1.jpg": require('../../assets/porto/assemblr_studio_1.jpg'),
   "agra_wais_1.png": require('../../assets/porto/agra_wais_1.png'),
+  "agra_wais_2.png": require('../../assets/porto/agra_wais_2.png'),
   "agate_astra_1.png": require('../../assets/porto/agate_astra_1.png'),
+  "agate_astra_2.png": require('../../assets/porto/agate_astra_2.png'),
   "agra_sigi_1.png": require('../../assets/porto/agra_sigi_1.png'),
+  "agra_sigi_2.png": require('../../assets/porto/agra_sigi_2.png'),
   "agate_gebyar_1.jpg": require('../../assets/porto/agate_gebyar_1.jpg'),
+  "agate_gebyar_2.png": require('../../assets/porto/agate_gebyar_2.png'),
   "agate_deus_1.png": require('../../assets/porto/agate_deus_1.png'),
   "agate_cpcm_1.png": require('../../assets/porto/agate_cpcm_1.png'),
   "agate_pistachio_1.png": require('../../assets/porto/agate_pistachio_1.png'),

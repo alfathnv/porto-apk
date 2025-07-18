@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import BoxDetailContent from '../components/BoxDetailContent';
+import { assetMap } from '../datas/contentList';
 
 const ContentDetailScreen = ({ route, navigation }) => {
   const { id, title, subtitle } = route.params;
@@ -11,23 +13,21 @@ const ContentDetailScreen = ({ route, navigation }) => {
   }, [navigation, title, subtitle]);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Content: {id}</Text>
-    </View>
+    <ScrollView contentContainerStyle={styles.scrollContent}>
+      <BoxDetailContent
+        image={assetMap['assemblr_metaverse_2.png']}
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, eu consectetur nisl nisi euismod nisi."
+      />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  scrollContent: {
+    paddingTop: 24,
+    paddingBottom: 32,
     backgroundColor: '#18191a',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 28,
-    fontWeight: 'bold',
+    minHeight: '100%',
   },
 });
 
