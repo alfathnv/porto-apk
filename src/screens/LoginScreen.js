@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, KeyboardAvoidingView, Platform, Alert, Image } from 'react-native';
-import {
-  TextInput,
-  Button,
-  Title,
-} from 'react-native-paper';
+import { TextInput, Button, Title } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const getRandomInt = (min, max) => {
@@ -12,10 +8,10 @@ const getRandomInt = (min, max) => {
 };
 
 const LoginScreen = ({ onLogin }) => {
-  const [num1] = React.useState(getRandomInt(1, 10));
-  const [num2] = React.useState(getRandomInt(1, 10));
-  const [answer, setAnswer] = React.useState('');
-  const [loading, setLoading] = React.useState(false);
+  const [num1] = useState(getRandomInt(1, 10));
+  const [num2] = useState(getRandomInt(1, 10));
+  const [answer, setAnswer] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = () => {
     setLoading(true);

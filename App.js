@@ -1,17 +1,15 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Provider as PaperProvider, MD3DarkTheme } from 'react-native-paper';
+import { Provider as PaperProvider, MD3DarkTheme, IconButton } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HomeScreen from './src/screens/HomeScreen';
 import ContentDetailScreen from './src/screens/ContentDetailScreen';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SocialsScreen from './src/screens/SocialScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { IconButton } from 'react-native-paper';
 import LoginScreen from './src/screens/LoginScreen';
 
 const Stack = createStackNavigator();
@@ -33,7 +31,7 @@ const customDarkTheme = {
 };
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true); // default true agar HomeScreen tampil
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const handleLogout = () => setIsLoggedIn(false);
 
   function HomeStack({ handleLogout }) {
@@ -115,7 +113,7 @@ export default function App() {
               tabBarStyle: { backgroundColor: '#2a2b2b', borderTopColor: '#232323' },
               tabBarActiveTintColor: '#90caf9',
               tabBarInactiveTintColor: '#888',
-              tabBarIcon: ({ color, size, focused }) => {
+              tabBarIcon: ({ color, size }) => {
                 let iconName;
                 if (route.name === 'HomeTab') iconName = 'home-variant';
                 else if (route.name === 'SocialsTab') iconName = 'web';

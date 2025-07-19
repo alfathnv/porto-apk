@@ -1,9 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, StyleSheet, Image, ScrollView, Pressable, Animated } from 'react-native';
-import { Appbar, Title, Button, BottomNavigation, Text } from 'react-native-paper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import SocialScreen from './SocialScreen';
-import { useRef } from 'react';
 import landingImg from '../../assets/landing.png';
 import BlurredPressableBox from '../components/BlurredPressableBox';
 import { useNavigation } from '@react-navigation/native';
@@ -11,8 +7,8 @@ import { dataContent, assetMap } from '../datas/contentList';
 
 const AnimatedPressableBox = ({ image, title, subtitle, id }) => {
   const navigation = useNavigation();
-  const animBox = useRef(new Animated.Value(0)).current; // for scale/opacity
-  const animFont = useRef(new Animated.Value(0)).current; // for fontSize/color
+  const animBox = useRef(new Animated.Value(0)).current;
+  const animFont = useRef(new Animated.Value(0)).current;
 
   const handlePressIn = () => {
     Animated.parallel([
@@ -136,29 +132,9 @@ const HomeRoute = ({ onLogout }) => (
 );
 
 const HomeScreen = ({ onLogout }) => {
-  const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    { key: 'home', title: 'Home', icon: 'home-variant' },
-    { key: 'socials', title: 'Socials', icon: 'web' },
-    { key: 'profile', title: 'Profile', icon: 'account' },
-  ]);
-
-  const renderScene = ({ route }) => {
-    switch (route.key) {
-      case 'home':
-        return <HomeRoute onLogout={onLogout} />;
-      case 'socials':
-        return <SocialsRoute />;
-      case 'profile':
-        return <ProfileRoute />;
-      default:
-        return null;
-    }
-  };
-
   return (
     <View style={styles.container}>
-      {renderScene({ route: routes[index] })}
+      <HomeRoute onLogout={onLogout} />
     </View>
   );
 };
@@ -177,30 +153,6 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
   },
-  title: {
-    color: '#ffffff',
-    marginBottom: 32,
-    fontSize: 24,
-    textAlign: 'center',
-  },
-  logoutButton: {
-    marginTop: 16,
-  },
-  bottomBar: {
-    backgroundColor: '#2a2b2b',
-  },
-  socialBox: {
-    backgroundColor: '#2a2b2b',
-    borderRadius: 12,
-    padding: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
-  },
   contentBox: {
     width: '100%',
     height: 160,
@@ -215,29 +167,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
   },
-  contentText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '500',
-  },
   contentImage: {
     width: '100%',
     height: '100%',
     borderRadius: 8,
     resizeMode: 'cover',
-  },
-  overlayText: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    zIndex: 2,
-    display: 'flex',
   },
   overlayTextContainer: {
     position: 'absolute',
@@ -285,17 +219,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 24,
     alignSelf: 'center',
-  },
-  devLabel: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginTop: 8,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    paddingHorizontal: 12,
-    paddingVertical: 2,
-    borderRadius: 8,
-    overflow: 'hidden',
   },
 });
 

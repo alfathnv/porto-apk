@@ -19,10 +19,9 @@ const ContentDetailScreen = ({ route }) => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [layoutHeight, setLayoutHeight] = useState(SCREEN_HEIGHT); // dynamically measured height
-
-  // Track the currently visible child index
+  const [layoutHeight, setLayoutHeight] = useState(SCREEN_HEIGHT);
   const [currentIndex, setCurrentIndex] = useState(0);
+  
   const viewabilityConfig = useRef({ viewAreaCoveragePercentThreshold: 60 }).current;
   const onViewableItemsChanged = useRef(({ viewableItems }) => {
     if (viewableItems && viewableItems.length > 0) {
@@ -42,13 +41,11 @@ const ContentDetailScreen = ({ route }) => {
 
   if (!content || !content.children) return null;
 
-  // Use the image of the currently visible child as the background
   const currentChild = content.children[currentIndex] || content.children[0];
   const backgroundImage = assetMap[currentChild.image];
 
   return (
     <>
-      {/* Blurry background image */}
       <View style={StyleSheet.absoluteFill} pointerEvents="none">
         <Image
           source={backgroundImage}
@@ -56,7 +53,6 @@ const ContentDetailScreen = ({ route }) => {
           blurRadius={16}
           resizeMode="cover"
         />
-        {/* Dark overlay for readability */}
         <View style={styles.backgroundOverlay} />
       </View>
 
@@ -88,7 +84,7 @@ const ContentDetailScreen = ({ route }) => {
         decelerationRate="fast"
         showsVerticalScrollIndicator={false}
         snapToAlignment="start"
-        style={{ backgroundColor: 'transparent' }} // Make transparent to show background
+        style={{ backgroundColor: 'transparent' }}
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={viewabilityConfig}
       />
@@ -126,7 +122,7 @@ const styles = StyleSheet.create({
   page: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'transparent', // Make transparent to show background
+    backgroundColor: 'transparent',
     paddingHorizontal: 24,
   },
   innerContentWrapper: {
