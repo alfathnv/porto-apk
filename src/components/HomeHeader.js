@@ -15,8 +15,8 @@ const HomeHeader = ({ onSearch, searchQuery, setSearchQuery }) => {
     <View style={styles.header}>
       {/* Greeting Section */}
       <View style={styles.greetingSection}>
-        <Text style={styles.greeting}>Hello, Alfath! 👋</Text>
-        <Text style={styles.subtitle}>Welcome back to your portfolio</Text>
+        <Text style={styles.greeting}>Hello, you can call me Rio! 👋</Text>
+        <Text style={styles.subtitle}>Welcome to my portfolio</Text>
       </View>
 
       {/* Search Bar */}

@@ -133,7 +133,8 @@ const dataContent = [
     released: true,
     category: "mobile",
     children: [
-      { image: "app_mybca_1", description: "Mobile banking application for BCA customers." }
+      { image: "app_mybca_1", description: "Prototype Purposes using React Native and Expo, Homepage MyBCA" },
+      { image: "app_mybca_2", description: "Prototype Purposes using React Native and Expo, Transaction MyBCA" }
     ]
   },
   {
@@ -144,7 +145,8 @@ const dataContent = [
     released: true,
     category: "mobile",
     children: [
-      { image: "app_bibit_1", description: "Investment and mutual fund application." }
+      { image: "app_bibit_1", description: "Prototype Purposes using React Native and Expo, Homepage Bibit" },
+      { image: "app_bibit_2", description: "Prototype Purposes using React Native and Expo, Portofolio Bibit" }
     ]
   },
   {
@@ -155,7 +157,155 @@ const dataContent = [
     released: true,
     category: "mobile",
     children: [
-      { image: "app_porto_1", description: "Portfolio management and tracking application." }
+      { image: "app_porto_1", description: "A fun project to sharpen my React Native skills, built with Expo, React Native Paper, and Material Design. I used a calculator-based login so anyone viewing my portfolio won't get confused with username or password." },
+      { image: "app_porto_2", description: "Homepage Displays a categorized list of my projects with filters by skill. Includes total project count, highlights of my core tech stack, years of experience, and a built-in search engine for easy navigation." },
+      { image: "app_porto_3", description: "Project Detail Page shows detailed information about each project with a smooth TikTok-style vertical scroll experience for navigating between items." },
+      { image: "app_porto_4", description: "Socials Page lists all my social media profiles with one-click access to each platform — making it easy to connect or explore my online presence." },
+      { image: "app_porto_5", description: "Profile Page contains information about me, including contact details, skills, and educational background all in one place for quick reference." }
+    ]
+  },
+  {
+    id: 13,
+    title: "ART 1",
+    subtitle: "Digital Art",
+    path: "art_1",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_1", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 14,
+    title: "ART 2",
+    subtitle: "Digital Art",
+    path: "art_2",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_2", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 15,
+    title: "ART 3",
+    subtitle: "Digital Art",
+    path: "art_3",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_3", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 16,
+    title: "ART 4",
+    subtitle: "Digital Art",
+    path: "art_4",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_4", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 17,
+    title: "ART 5",
+    subtitle: "Digital Art",
+    path: "art_5",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_5", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 18,
+    title: "ART 6",
+    subtitle: "Digital Art",
+    path: "art_6",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_6", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 19,
+    title: "ART 7",
+    subtitle: "Digital Art",
+    path: "art_7",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_7", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 20,
+    title: "ART 8",
+    subtitle: "Digital Art",
+    path: "art_8",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_8", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 21,
+    title: "ART 9",
+    subtitle: "Digital Art",
+    path: "art_9",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_9", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 22,
+    title: "ART 10",
+    subtitle: "Digital Art",
+    path: "art_10",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_10", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 23,
+    title: "ART 11",
+    subtitle: "Digital Art",
+    path: "art_11",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_11", description: "Digital artwork showcasing creative design skills." }
+    ]
+  },
+  {
+    id: 24,
+    title: "ART 12",
+    subtitle: "Digital Art",
+    path: "art_12",
+    released: true,
+    category: "art",
+    isArtProject: true,
+    children: [
+      { image: "art_12", description: "Digital artwork showcasing creative design skills." }
     ]
   }
 ];
@@ -206,8 +356,29 @@ const assetMap = {
   "assemblr_studio_5": require('../../assets/porto/assemblr_studio_5.jpg'),
 
   "app_mybca_1": require('../../assets/porto/app_mybca_1.jpg'),
+  "app_mybca_2": require('../../assets/porto/app_mybca_2.jpg'),
+
   "app_bibit_1": require('../../assets/porto/app_bibit_1.jpg'),
+  "app_bibit_2": require('../../assets/porto/app_bibit_2.jpg'),
+
   "app_porto_1": require('../../assets/porto/app_porto_1.jpg'),
+  "app_porto_2": require('../../assets/porto/app_porto_2.jpg'),
+  "app_porto_3": require('../../assets/porto/app_porto_3.jpg'),
+  "app_porto_4": require('../../assets/porto/app_porto_4.jpg'),
+  "app_porto_5": require('../../assets/porto/app_porto_5.jpg'),
+
+  "art_1": require('../../assets/porto/art_1.jpg'),
+  "art_2": require('../../assets/porto/art_2.jpg'),
+  "art_3": require('../../assets/porto/art_3.jpg'),
+  "art_4": require('../../assets/porto/art_4.jpg'),
+  "art_5": require('../../assets/porto/art_5.jpg'),
+  "art_6": require('../../assets/porto/art_6.jpg'),
+  "art_7": require('../../assets/porto/art_7.png'),
+  "art_8": require('../../assets/porto/art_8.png'),
+  "art_9": require('../../assets/porto/art_9.png'),
+  "art_10": require('../../assets/porto/art_10.png'),
+  "art_11": require('../../assets/porto/art_11.png'),
+  "art_12": require('../../assets/porto/art_12.png'),
 };
 
 export { dataContent, assetMap, categories }; 

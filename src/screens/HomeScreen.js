@@ -140,26 +140,43 @@ const HomeRoute = () => {
         />
         <View style={styles.content}>
           {filteredContent.length > 0 ? (
-            filteredContent.map((item) =>
-              item.released ? (
-                <AnimatedPressableBox
-                  key={item.id}
-                  image={assetMap[item.path]}
-                  title={item.title}
-                  subtitle={item.subtitle}
-                  id={item.id}
-                />
-              ) : (
-                <BlurredPressableBox
-                  key={item.id}
-                  image={assetMap[item.path]}
-                  title={item.title}
-                  subtitle={item.subtitle}
-                  id={item.id}
-                  disableNavigate={true}
-                />
-              )
-            )
+            filteredContent.map((item) => {
+              if (item.isArtProject) {
+                // Art projects - show full image, not clickable
+                return (
+                  <View key={item.id} style={styles.artBox}>
+                    <Image 
+                      source={assetMap[item.path]} 
+                      style={styles.artImage}
+                      resizeMode="contain"
+                    />
+                  </View>
+                );
+              } else if (item.released) {
+                // Regular projects - clickable with animation
+                return (
+                  <AnimatedPressableBox
+                    key={item.id}
+                    image={assetMap[item.path]}
+                    title={item.title}
+                    subtitle={item.subtitle}
+                    id={item.id}
+                  />
+                );
+              } else {
+                // Unreleased projects - blurred
+                return (
+                  <BlurredPressableBox
+                    key={item.id}
+                    image={assetMap[item.path]}
+                    title={item.title}
+                    subtitle={item.subtitle}
+                    id={item.id}
+                    disableNavigate={true}
+                  />
+                );
+              }
+            })
           ) : (
             <View style={styles.emptyState}>
               <Text style={styles.emptyStateText}>
@@ -268,6 +285,56 @@ const styles = StyleSheet.create({
     color: '#666',
     fontSize: 16,
     textAlign: 'center',
+  },
+  artBox: {
+    width: '100%',
+    height: 300,
+    backgroundColor: '#2a2b2b',
+    borderRadius: 12,
+    marginBottom: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  artImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+  },
+  artOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    borderRadius: 8,
+    zIndex: 1,
+  },
+  artTitle: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textShadowColor: 'rgba(0,0,0,0.8)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 6,
+  },
+  artSubtitle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '500',
+    textAlign: 'center',
+    marginTop: 4,
+    textShadowColor: 'rgba(0,0,0,0.8)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 6,
   },
 });
 
