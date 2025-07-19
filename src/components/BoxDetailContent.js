@@ -24,11 +24,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     position: 'relative',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   fullImage: {
     width: '100%',
     height: '100%',
+    maxHeight: 500,
   },
   outerContainer: {
     width: '100%',

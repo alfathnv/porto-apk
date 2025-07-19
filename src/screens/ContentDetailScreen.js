@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   fullImage: {
-    width: '90%',
-    height: '90%',
+    width: '100%',
+    height: '100%',
   },
 });
 
