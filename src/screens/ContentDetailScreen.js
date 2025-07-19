@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import BoxDetailContent from '../components/BoxDetailContent';
 import { dataContent, assetMap } from '../datas/contentList';
+import { Image as CachedImage } from "react-native-expo-image-cache";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -47,8 +48,8 @@ const ContentDetailScreen = ({ route }) => {
   return (
     <>
       <View style={StyleSheet.absoluteFill} pointerEvents="none">
-        <Image
-          source={backgroundImage}
+        <CachedImage
+          uri={Image.resolveAssetSource(backgroundImage).uri}
           style={styles.backgroundImage}
           blurRadius={16}
           resizeMode="cover"
@@ -92,8 +93,8 @@ const ContentDetailScreen = ({ route }) => {
       <Modal visible={modalVisible} transparent>
         <Pressable style={styles.modalContainer} onPress={closeModal}>
           {selectedImage && (
-            <Image
-              source={selectedImage}
+            <CachedImage
+              uri={Image.resolveAssetSource(selectedImage).uri}
               style={styles.fullImage}
               resizeMode="contain"
             />

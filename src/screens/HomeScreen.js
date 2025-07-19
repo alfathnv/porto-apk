@@ -7,8 +7,6 @@ import CategoryFilter from '../components/CategoryFilter';
 import { dataContent, assetMap } from '../datas/contentList';
 import { Image as CachedImage } from "react-native-expo-image-cache";
 
-
-
 const HomeRoute = () => {
   const PAGE_SIZE = 8;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);

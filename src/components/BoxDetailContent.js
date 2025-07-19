@@ -1,12 +1,16 @@
 import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
+import { Image as CachedImage } from "react-native-expo-image-cache";
+
+
+
 
 const BoxDetailContent = ({ image, description, onImagePress }) => (
   <View style={styles.outerContainer}>
     <TouchableOpacity onPress={onImagePress} activeOpacity={0.8} style={styles.imageContainer}>
-      <Image
-        source={image}
+      <CachedImage
+        uri={Image.resolveAssetSource(image).uri}
         style={styles.fullImage}
         resizeMode="contain"
       />
