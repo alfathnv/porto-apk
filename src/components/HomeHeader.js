@@ -8,8 +8,11 @@ const HomeHeader = ({ onSearch, searchQuery, setSearchQuery }) => {
   // Calculate skills count from categories (excluding 'all')
   const skillsCount = categories.filter(cat => cat.id !== 'all').length;
   
-  // Calculate projects count from dataContent
-  const projectsCount = dataContent.length;
+  // Calculate projects count from dataContent (excluding art projects)
+  const projectsCount = dataContent.filter(item => !item.isArtProject).length;
+  
+  // Calculate art count from dataContent
+  const artCount = dataContent.filter(item => item.isArtProject).length;
 
   return (
     <View style={styles.header}>
@@ -45,6 +48,11 @@ const HomeHeader = ({ onSearch, searchQuery, setSearchQuery }) => {
         <View style={styles.statItem}>
           <Text style={styles.statNumber}>{projectsCount}</Text>
           <Text style={styles.statLabel}>Projects</Text>
+        </View>
+        <View style={styles.statDivider} />
+        <View style={styles.statItem}>
+          <Text style={styles.statNumber}>{artCount}</Text>
+          <Text style={styles.statLabel}>Arts</Text>
         </View>
         <View style={styles.statDivider} />
         <View style={styles.statItem}>
