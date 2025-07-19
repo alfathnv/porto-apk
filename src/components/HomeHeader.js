@@ -2,25 +2,21 @@ import React from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 import { Text, IconButton } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-const categories = [
-  { id: 'all', name: 'All', icon: 'apps' },
-  { id: 'web', name: 'Web', icon: 'web' },
-  { id: 'mobile', name: 'Mobile', icon: 'cellphone' },
-  { id: 'art', name: 'Art', icon: 'palette' },
-  { id: 'games', name: 'Games', icon: 'gamepad-variant' },
-];
+import { categories, dataContent } from '../datas/contentList';
 
 const HomeHeader = ({ onSearch, searchQuery, setSearchQuery }) => {
   // Calculate skills count from categories (excluding 'all')
   const skillsCount = categories.filter(cat => cat.id !== 'all').length;
+  
+  // Calculate projects count from dataContent
+  const projectsCount = dataContent.length;
 
   return (
     <View style={styles.header}>
       {/* Greeting Section */}
       <View style={styles.greetingSection}>
-        <Text style={styles.greeting}>Hello, you can call me Rio! 👋</Text>
-        <Text style={styles.subtitle}>Welcome to my portfolio</Text>
+        <Text style={styles.greeting}>Hello, Alfath! 👋</Text>
+        <Text style={styles.subtitle}>Welcome back to your portfolio</Text>
       </View>
 
       {/* Search Bar */}
@@ -47,7 +43,7 @@ const HomeHeader = ({ onSearch, searchQuery, setSearchQuery }) => {
       {/* Quick Stats */}
       <View style={styles.statsContainer}>
         <View style={styles.statItem}>
-          <Text style={styles.statNumber}>8</Text>
+          <Text style={styles.statNumber}>{projectsCount}</Text>
           <Text style={styles.statLabel}>Projects</Text>
         </View>
         <View style={styles.statDivider} />

@@ -2,14 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-const categories = [
-  { id: 'all', name: 'All', icon: 'apps' },
-  { id: 'web', name: 'Web', icon: 'web' },
-  { id: 'mobile', name: 'Mobile', icon: 'cellphone' },
-  { id: 'art', name: 'Art', icon: 'palette' },
-  { id: 'games', name: 'Games', icon: 'gamepad-variant' },
-];
+import { categories } from '../datas/contentList';
 
 const CategoryFilter = ({ selectedCategory, onCategoryChange }) => {
   return (
