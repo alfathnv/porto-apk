@@ -1,27 +1,36 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, useWindowDimensions } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 
 const InfoCard = ({ personalData }) => {
   const theme = useTheme();
+  const { width } = useWindowDimensions();
+  
+  const containerWidth = width - 32; // Account for padding
+  const photoSize = containerWidth * 0.3; // 30% of container width
+  const infoWidth = containerWidth * 0.7; // 70% of container width
+  
+  const nameFontSize = Math.max(photoSize * 0.15, 18);
+  const titleFontSize = Math.max(photoSize * 0.12, 14);
+  const locationFontSize = Math.max(photoSize * 0.1, 12);
 
   return (
     <View style={styles.header}>
       <Image
-        source={require('../../assets/logo.png')}
-        style={styles.profileImage}
+        source={require('../../assets/photo.jpeg')}
+        style={[styles.profileImage, { width: photoSize, height: photoSize, borderRadius: photoSize / 2 }]}
       />
-      <View style={styles.headerInfo}>
-        <Text variant="headlineMedium" style={[styles.name, { color: theme.colors.onBackground }]}>
+      <View style={[styles.headerInfo, { width: infoWidth }]}>
+        <Text style={[styles.name, { color: theme.colors.onBackground, fontSize: nameFontSize }]}>
           {personalData.name}
         </Text>
-        <Text variant="titleMedium" style={[styles.title, { color: theme.colors.primary }]}>
+        <Text style={[styles.title, { color: theme.colors.primary, fontSize: titleFontSize }]}>
           {personalData.title}
         </Text>
-        <Text variant="titleMedium" style={[styles.title, { color: theme.colors.primary }]}>
+        <Text style={[styles.title, { color: theme.colors.primary, fontSize: titleFontSize }]}>
           {personalData.subtitle}
         </Text>
-        <Text variant="bodyMedium" style={[styles.location, { color: theme.colors.onSurfaceVariant }]}>
+        <Text style={[styles.location, { color: theme.colors.onSurfaceVariant, fontSize: locationFontSize }]}>
           📍 {personalData.location}
         </Text>
       </View>
@@ -37,9 +46,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   profileImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
     marginRight: 16,
   },
   headerInfo: {

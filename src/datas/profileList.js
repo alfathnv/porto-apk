@@ -1,7 +1,7 @@
 export const personalData = {
   name: 'Alfath Noverio',
-  title: 'Full Stack Programmer',
-  subtitle: 'Chief Technology Officer of Agranara',
+  title: 'Full Stack Programmer at Agate',
+  subtitle: 'Chief Technology Officer at Agranara',
   location: 'Bandung, Indonesia',
   email: 'alfathnv@gmail.com',
   phone: '+62 81324327564',
