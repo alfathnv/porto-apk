@@ -59,10 +59,10 @@ const dataContent = [
     path: "agra_sigi_1.png",
     released: true,
     children: [
-      { image: "agra_sigi_2.png", description: "Deskripsi untuk SIGI Mandiri 2." },
-      { image: "agra_sigi_3.png", description: "Deskripsi untuk SIGI Mandiri 3." },
-      { image: "agra_sigi_4.png", description: "Deskripsi untuk SIGI Mandiri 4." },
-      { image: "agra_sigi_5.png", description: "Deskripsi untuk SIGI Mandiri 5." }
+      { image: "agra_sigi_2.png", description: "For my next project at Agranara, I was assigned to build a Reliability, Availability, Maintainability, and Safety (RAMS) system from scratch for SIGI Mandiri, using React and Laravel" },
+      { image: "agra_sigi_3.png", description: "I created the dashboard for the system and was able to work faster than before, as I had become more comfortable working with backend development and databases" },
+      { image: "agra_sigi_4.png", description: "I also worked on the master data module, and by this time, I was the person in charge of deploying the application to the staging, development, and production environments on Mandiri’s server." },
+      { image: "agra_sigi_5.png", description: "Since they wanted a separate customer management system for RAMS, I developed it by following the structure and standards of the existing system. After the project was completed, I was fortunate enough to be appointed as Chief Technology Officer to help lead the company forward." }
     ]
   },
   {
@@ -72,9 +72,9 @@ const dataContent = [
     path: "agate_gebyar_1.jpg",
     released: true,
     children: [
-      { image: "agate_gebyar_2.png", description: "Deskripsi untuk Gebyar BCA 2." },
-      { image: "agate_gebyar_3.png", description: "Deskripsi untuk Gebyar BCA 3." },
-      { image: "agate_gebyar_4.png", description: "Deskripsi untuk Gebyar BCA 4." }
+      { image: "agate_gebyar_2.png", description: "After my sixth month at Agate, I received a new contract and was assigned to a new project, as well as to the Maintainer Team for ongoing initiatives. One of these was BCA Gebyar, starting from Period 3, where I continued as part of the core maintainer team." },
+      { image: "agate_gebyar_3.png", description: "One of the biggest challenges I faced was fixing a race condition in the BCA Gebyar gacha system. Due to a tight deadline and limited understanding of the full codebase, I had to rely on trial and error to identify the issue and also wrote a query to detect users affected by the problem." },
+      { image: "agate_gebyar_4.png", description: "I was also fully in charge of the CMS system, and by this time, I had become the sole maintainer of BCA Gebyar, as the previous maintainer had moved on to a new project." }
     ]
   },
   {
@@ -84,8 +84,8 @@ const dataContent = [
     path: "agate_deus_1.png",
     released: true,
     children: [
-      { image: "agate_deus_2.png", description: "Deskripsi untuk DEUS HOAFL 2." },
-      { image: "agate_deus_3.png", description: "Deskripsi untuk DEUS HOAFL 3." }
+      { image: "agate_deus_2.png", description: "I also maintained the DEUS HOAFL project, which focused on check-in competency for hiring through gamified assessments." },
+      { image: "agate_deus_3.png", description: "I also maintained the dashboard for the project. One of the main challenges I encountered was discovering that the previous deployment's repository was not included in the new repo. To resolve the issue and fix the game, I had to coordinate with the server maintainer to temporarily reactivate the old repository." }
     ]
   },
   {
