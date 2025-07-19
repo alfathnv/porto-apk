@@ -172,7 +172,7 @@ const dataContent = [
     released: true,
     category: "game",
     children: [
-      { image: "game_1", description: "I also maintained the DEUS HOAFL project, which focused on check-in competency for hiring through gamified assessments." },
+      { image: "game_1", description: "My Prototype system for a game project like survivor.io, built with Unity and Godot Script" },
     ]
   },
   {
@@ -183,7 +183,7 @@ const dataContent = [
     released: true,
     category: "game",
     children: [
-      { image: "game_2", description: "I also maintained the DEUS HOAFL project, which focused on check-in competency for hiring through gamified assessments." },
+      { image: "game_2", description: "My Prototype bouncing slime for game project like survivor.io, built with Unity and Godot Script" },
     ]
   },
   {
