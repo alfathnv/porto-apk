@@ -123,7 +123,7 @@ export default function App() {
               },
             })}
           >
-            <Tab.Screen name="HomeTab">
+            <Tab.Screen name="HomeTab" options={{ title: 'Home' }}>
               {() => <HomeStack handleLogout={handleLogout} />}
             </Tab.Screen>
             <Tab.Screen name="SocialsTab" component={SocialsStack} options={{ title: 'Socials' }} />

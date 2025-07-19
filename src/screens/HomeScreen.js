@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { View, StyleSheet, Image, ScrollView, Pressable, Animated } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, Pressable, Animated, Text } from 'react-native';
 import landingImg from '../../assets/landing.png';
 import BlurredPressableBox from '../components/BlurredPressableBox';
+import HomeHeader from '../components/HomeHeader';
+import CategoryFilter from '../components/CategoryFilter';
 import { useNavigation } from '@react-navigation/native';
 import { dataContent, assetMap } from '../datas/contentList';
 
@@ -24,6 +26,7 @@ const AnimatedPressableBox = ({ image, title, subtitle, id }) => {
       }),
     ]).start();
   };
+  
   const handlePressOut = () => {
     Animated.parallel([
       Animated.timing(animBox, {
@@ -43,10 +46,12 @@ const AnimatedPressableBox = ({ image, title, subtitle, id }) => {
     inputRange: [0, 1],
     outputRange: [0, 0.25],
   });
+  
   const imageOpacity = animBox.interpolate({
     inputRange: [0, 1],
     outputRange: [0.5, 0.6],
   });
+  
   const scale = animBox.interpolate({
     inputRange: [0, 1],
     outputRange: [1, 1.04],
@@ -67,10 +72,6 @@ const AnimatedPressableBox = ({ image, title, subtitle, id }) => {
             style={[
               styles.overlayTitle,
               {
-                color: animFont.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ['#fff', '#fff'],
-                }),
                 fontSize: animFont.interpolate({
                   inputRange: [0, 1],
                   outputRange: [22, 26],
@@ -84,10 +85,6 @@ const AnimatedPressableBox = ({ image, title, subtitle, id }) => {
             style={[
               styles.overlaySubtitle,
               {
-                color: animFont.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ['#fff', '#fff'],
-                }),
                 fontSize: animFont.interpolate({
                   inputRange: [0, 1],
                   outputRange: [16, 19],
@@ -103,39 +100,83 @@ const AnimatedPressableBox = ({ image, title, subtitle, id }) => {
   );
 };
 
-const HomeRoute = ({ onLogout }) => (
-  <ScrollView contentContainerStyle={styles.scrollContent}>
-    <View style={styles.content}>
-      {dataContent.map((item) =>
-        item.released ? (
-          <AnimatedPressableBox
-            key={item.id}
-            image={assetMap[item.path]}
-            title={item.title}
-            subtitle={item.subtitle}
-            id={item.id}
-          />
-        ) : (
-          <BlurredPressableBox
-            key={item.id}
-            image={assetMap[item.path]}
-            title={item.title}
-            subtitle={item.subtitle}
-            id={item.id}
-            disableNavigate={true}
-          />
-        )
-      )}
-      <Image source={landingImg} style={styles.landingImageInScroll} />
-    </View>
-  </ScrollView>
-);
+const HomeRoute = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
-const HomeScreen = ({ onLogout }) => {
+  const filteredContent = dataContent.filter((item) => {
+    const matchesSearch = searchQuery === '' || 
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.subtitle.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesCategory = selectedCategory === 'all' || 
+      (item.category && item.category === selectedCategory);
+    
+    return matchesSearch && matchesCategory;
+  });
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <View style={styles.container}>
-      <HomeRoute onLogout={onLogout} />
+      <ScrollView 
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <HomeHeader 
+          onSearch={handleSearch}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+        <CategoryFilter 
+          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange}
+        />
+        <View style={styles.content}>
+          {filteredContent.length > 0 ? (
+            filteredContent.map((item) =>
+              item.released ? (
+                <AnimatedPressableBox
+                  key={item.id}
+                  image={assetMap[item.path]}
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  id={item.id}
+                />
+              ) : (
+                <BlurredPressableBox
+                  key={item.id}
+                  image={assetMap[item.path]}
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  id={item.id}
+                  disableNavigate={true}
+                />
+              )
+            )
+          ) : (
+            <View style={styles.emptyState}>
+              <Text style={styles.emptyStateText}>
+                No Projects Found
+              </Text>
+            </View>
+          )}
+          <Image source={landingImg} style={styles.landingImageInScroll} />
+        </View>
+      </ScrollView>
     </View>
+  );
+};
+
+const HomeScreen = () => {
+  return (
+    <HomeRoute />
   );
 };
 
@@ -144,14 +185,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#222323',
   },
+  scrollContent: {
+    flexGrow: 1,
+  },
   content: {
-    flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 24,
-  },
-  scrollContent: {
-    flexGrow: 1,
   },
   contentBox: {
     width: '100%',
@@ -182,7 +222,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 2,
-    display: 'flex',
   },
   overlayTitle: {
     color: '#fff',
@@ -219,6 +258,16 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 24,
     alignSelf: 'center',
+  },
+  emptyState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 40,
+  },
+  emptyStateText: {
+    color: '#666',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
 

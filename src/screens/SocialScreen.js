@@ -5,14 +5,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { socialList } from '../datas/socialList';
 
 const SocialScreen = () => {
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   
-  // Calculate responsive dimensions
   const screenPadding = 20;
   const availableWidth = width - (screenPadding * 2);
-  const squareSize = Math.min(availableWidth / 2 - 16, 140); // Max 140px, min based on screen
-  const iconSize = Math.max(squareSize * 0.3, 24); // Responsive icon size
-  const fontSize = Math.max(squareSize * 0.13, 12); // Responsive font size
+  const squareSize = Math.min(availableWidth / 2 - 16, 140);
+  const iconSize = Math.max(squareSize * 0.3, 24);
+  const fontSize = Math.max(squareSize * 0.13, 12);
   
   const handleSocialPress = async (social) => {
     try {
@@ -44,7 +43,7 @@ const SocialScreen = () => {
         {rowItems.map((social) => (
           <TouchableOpacity
             key={social.id}
-            style={styles.socialSquare}
+            style={[styles.socialSquare, { width: squareSize, height: squareSize }]}
             onPress={() => handleSocialPress(social)}
             activeOpacity={0.7}
           >
@@ -53,56 +52,52 @@ const SocialScreen = () => {
               size={iconSize} 
               color={social.color} 
             />
-            <Text style={styles.socialLabel}>{social.name}</Text>
+            <Text style={[styles.socialLabel, { fontSize }]}>{social.name}</Text>
           </TouchableOpacity>
         ))}
       </View>
     );
   };
-  
-  const styles = StyleSheet.create({
-    socialsGrid: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#222323',
-      paddingHorizontal: screenPadding,
-    },
-    socialsRow: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-    },
-    socialSquare: {
-      width: squareSize,
-      height: squareSize,
-      backgroundColor: '#232425',
-      borderRadius: 16,
-      margin: 8,
-      justifyContent: 'center',
-      alignItems: 'center',
-      elevation: 4,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
-    },
-    socialLabel: {
-      color: '#fff',
-      marginTop: 8,
-      fontSize: fontSize,
-      fontWeight: '600',
-      textAlign: 'center',
-    },
-  });
 
   return (
-    <View style={styles.socialsGrid}>
-      {renderSocialRow(0)} {/* Email, WA */}
-      {renderSocialRow(2)} {/* LinkedIn, Github */}
-      {renderSocialRow(4)} {/* Instagram, Discord */}
-      {renderSocialRow(6)} {/* Artstation, Itch.io */}
+    <View style={[styles.socialsGrid, { paddingHorizontal: screenPadding }]}>
+      {renderSocialRow(0)}
+      {renderSocialRow(2)}
+      {renderSocialRow(4)}
+      {renderSocialRow(6)}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  socialsGrid: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#222323',
+  },
+  socialsRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  socialSquare: {
+    backgroundColor: '#232425',
+    borderRadius: 16,
+    margin: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  socialLabel: {
+    color: '#fff',
+    marginTop: 8,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+});
 
 export default SocialScreen; 
