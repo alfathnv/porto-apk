@@ -2,8 +2,8 @@ const categories = [
   { id: 'all', name: 'All', icon: 'apps' },
   { id: 'web', name: 'Web', icon: 'web' },
   { id: 'mobile', name: 'Mobile', icon: 'cellphone' },
-  { id: 'art', name: 'Art', icon: 'palette' },
-  { id: 'games', name: 'Games', icon: 'gamepad-variant' },
+  { id: 'game', name: 'Games(Newbie)', icon: 'gamepad-variant' },
+  { id: 'art', name: 'Art(Newbie)', icon: 'palette' },
 ];
 
 const dataContent = [
@@ -166,6 +166,36 @@ const dataContent = [
   },
   {
     id: 13,
+    title: "Game Prototype",
+    subtitle: "Survivor Prototype",
+    path: "game_1",
+    released: true,
+    category: "game",
+    children: [
+      { image: "game_1", description: "I also maintained the DEUS HOAFL project, which focused on check-in competency for hiring through gamified assessments." },
+    ]
+  },
+  {
+    id: 14,
+    title: "Game Prototype",
+    subtitle: "Bouncing Slime",
+    path: "game_2",
+    released: true,
+    category: "game",
+    children: [
+      { image: "game_2", description: "I also maintained the DEUS HOAFL project, which focused on check-in competency for hiring through gamified assessments." },
+    ]
+  },
+  {
+    id: 15,
+    title: "Game",
+    subtitle: "Slime Survivor",
+    path: "game_3",
+    released: false,
+    category: "game",
+  },
+  {
+    id: 16,
     title: "ART 1",
     subtitle: "Digital Art",
     path: "art_1",
@@ -177,7 +207,7 @@ const dataContent = [
     ]
   },
   {
-    id: 14,
+    id: 17,
     title: "ART 2",
     subtitle: "Digital Art",
     path: "art_2",
@@ -189,7 +219,7 @@ const dataContent = [
     ]
   },
   {
-    id: 15,
+    id: 18,
     title: "ART 3",
     subtitle: "Digital Art",
     path: "art_3",
@@ -201,7 +231,7 @@ const dataContent = [
     ]
   },
   {
-    id: 16,
+    id: 19,
     title: "ART 4",
     subtitle: "Digital Art",
     path: "art_4",
@@ -213,7 +243,7 @@ const dataContent = [
     ]
   },
   {
-    id: 17,
+    id: 20,
     title: "ART 5",
     subtitle: "Digital Art",
     path: "art_5",
@@ -225,7 +255,7 @@ const dataContent = [
     ]
   },
   {
-    id: 18,
+    id: 21,
     title: "ART 6",
     subtitle: "Digital Art",
     path: "art_6",
@@ -237,7 +267,7 @@ const dataContent = [
     ]
   },
   {
-    id: 19,
+    id: 22,
     title: "ART 7",
     subtitle: "Digital Art",
     path: "art_7",
@@ -249,7 +279,7 @@ const dataContent = [
     ]
   },
   {
-    id: 20,
+    id: 23,
     title: "ART 8",
     subtitle: "Digital Art",
     path: "art_8",
@@ -261,7 +291,7 @@ const dataContent = [
     ]
   },
   {
-    id: 21,
+    id: 24,
     title: "ART 9",
     subtitle: "Digital Art",
     path: "art_9",
@@ -273,7 +303,7 @@ const dataContent = [
     ]
   },
   {
-    id: 22,
+    id: 25,
     title: "ART 10",
     subtitle: "Digital Art",
     path: "art_10",
@@ -285,7 +315,7 @@ const dataContent = [
     ]
   },
   {
-    id: 23,
+    id: 26,
     title: "ART 11",
     subtitle: "Digital Art",
     path: "art_11",
@@ -297,7 +327,7 @@ const dataContent = [
     ]
   },
   {
-    id: 24,
+    id: 27,
     title: "ART 12",
     subtitle: "Digital Art",
     path: "art_12",
@@ -307,7 +337,7 @@ const dataContent = [
     children: [
       { image: "art_12", description: "Digital artwork showcasing creative design skills." }
     ]
-  }
+  },
 ];
 
 const assetMap = {
@@ -366,6 +396,10 @@ const assetMap = {
   "app_porto_3": require('../../assets/porto/webp/app_porto_3.webp'),
   "app_porto_4": require('../../assets/porto/webp/app_porto_4.webp'),
   "app_porto_5": require('../../assets/porto/webp/app_porto_5.webp'),
+
+  "game_1": require('../../assets/porto/webp/game_1.webp'),
+  "game_2": require('../../assets/porto/webp/game_2.webp'),
+  "game_3": require('../../assets/porto/webp/game_3.webp'),
 
   "art_1": require('../../assets/porto/webp/art_1.webp'),
   "art_2": require('../../assets/porto/webp/art_2.webp'),
