@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Image, ScrollView, Text } from 'react-native';
-import landingImg from '../../assets/landing.png';
 import BlurredPressableBox from '../components/BlurredPressableBox';
 import AnimatedPressableBox from '../components/AnimatedPressableBox';
 import HomeHeader from '../components/HomeHeader';
@@ -110,7 +109,6 @@ const HomeRoute = () => {
               </Text>
             </View>
           )}
-          <Image source={landingImg} style={styles.landingImageInScroll} />
         </View>
       </ScrollView>
     </View>
