@@ -68,10 +68,6 @@ const BlurredPressableBox = ({ image, title, subtitle, devLabel = 'Coming Soon',
             style={[
               styles.overlayTitle,
               {
-                color: animFont.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ['#fff', '#fff'],
-                }),
                 fontSize: animFont.interpolate({
                   inputRange: [0, 1],
                   outputRange: [22, 26],
@@ -85,10 +81,6 @@ const BlurredPressableBox = ({ image, title, subtitle, devLabel = 'Coming Soon',
             style={[
               styles.overlaySubtitle,
               {
-                color: animFont.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ['#fff', '#fff'],
-                }),
                 fontSize: animFont.interpolate({
                   inputRange: [0, 1],
                   outputRange: [16, 19],

@@ -4,20 +4,18 @@ import { Text } from 'react-native-paper';
 
 const BoxDetailContent = ({ image, description, onImagePress }) => (
   <View style={styles.outerContainer}>
-    <View style={styles.container}>
-      <TouchableOpacity onPress={onImagePress} activeOpacity={0.8} style={styles.imageContainer}>
-        <Image
-          source={image}
-          style={styles.fullImage}
-          resizeMode="contain"
-        />
-        {description ? (
-          <View style={styles.overlayTextContainer} pointerEvents="none">
-            <Text style={styles.description}>{description}</Text>
-          </View>
-        ) : null}
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={onImagePress} activeOpacity={0.8} style={styles.imageContainer}>
+      <Image
+        source={image}
+        style={styles.fullImage}
+        resizeMode="contain"
+      />
+      {description && (
+        <View style={styles.overlayTextContainer} pointerEvents="none">
+          <Text style={styles.description}>{description}</Text>
+        </View>
+      )}
+    </TouchableOpacity>
   </View>
 );
 
@@ -33,11 +31,6 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   outerContainer: {
-    width: '100%',
-    alignItems: 'center',
-  },
-  container: {
-    flexDirection: 'column',
     width: '100%',
     alignItems: 'center',
   },
