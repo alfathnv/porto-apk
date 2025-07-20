@@ -1,16 +1,27 @@
 import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Image as CachedImage } from "react-native-expo-image-cache";
 
-
-
+// Helper function to get image source that works on both native and web
+const getImageSource = (asset) => {
+  if (Platform.OS === 'web') {
+    // On web, we need to handle the asset differently
+    if (asset && asset.default) {
+      return asset.default;
+    }
+    return asset;
+  } else {
+    // On native, use resolveAssetSource
+    return Image.resolveAssetSource(asset).uri;
+  }
+};
 
 const BoxDetailContent = ({ image, description, onImagePress }) => (
   <View style={styles.outerContainer}>
     <TouchableOpacity onPress={onImagePress} activeOpacity={0.8} style={styles.imageContainer}>
       <CachedImage
-        uri={Image.resolveAssetSource(image).uri}
+        uri={getImageSource(image)}
         style={styles.fullImage}
         resizeMode="contain"
       />

@@ -7,12 +7,27 @@ import {
   Modal,
   Image,
   Pressable,
+  Platform,
 } from 'react-native';
 import BoxDetailContent from '../components/BoxDetailContent';
 import { dataContent, assetMap } from '../datas/contentList';
 import { Image as CachedImage } from "react-native-expo-image-cache";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+
+// Helper function to get image source that works on both native and web
+const getImageSource = (asset) => {
+  if (Platform.OS === 'web') {
+    // On web, we need to handle the asset differently
+    if (asset && asset.default) {
+      return asset.default;
+    }
+    return asset;
+  } else {
+    // On native, use resolveAssetSource
+    return Image.resolveAssetSource(asset).uri;
+  }
+};
 
 const ContentDetailScreen = ({ route }) => {
   const { id } = route.params;
@@ -49,7 +64,7 @@ const ContentDetailScreen = ({ route }) => {
     <>
       <View style={StyleSheet.absoluteFill} pointerEvents="none">
         <CachedImage
-          uri={Image.resolveAssetSource(backgroundImage).uri}
+          uri={getImageSource(backgroundImage)}
           style={styles.backgroundImage}
           blurRadius={16}
           resizeMode="cover"
@@ -94,7 +109,7 @@ const ContentDetailScreen = ({ route }) => {
         <Pressable style={styles.modalContainer} onPress={closeModal}>
           {selectedImage && (
             <CachedImage
-              uri={Image.resolveAssetSource(selectedImage).uri}
+              uri={getImageSource(selectedImage)}
               style={styles.fullImage}
               resizeMode="contain"
             />

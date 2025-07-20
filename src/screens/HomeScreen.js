@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Image, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, Text, Platform } from 'react-native';
 import BlurredPressableBox from '../components/BlurredPressableBox';
 import AnimatedPressableBox from '../components/AnimatedPressableBox';
 import HomeHeader from '../components/HomeHeader';
 import CategoryFilter from '../components/CategoryFilter';
 import { dataContent, assetMap } from '../datas/contentList';
 import { Image as CachedImage } from "react-native-expo-image-cache";
+
+// Helper function to get image source that works on both native and web
+const getImageSource = (asset) => {
+  if (Platform.OS === 'web') {
+    // On web, we need to handle the asset differently
+    if (asset && asset.default) {
+      return asset.default;
+    }
+    return asset;
+  } else {
+    // On native, use resolveAssetSource
+    return Image.resolveAssetSource(asset).uri;
+  }
+};
 
 const HomeRoute = () => {
   const PAGE_SIZE = 8;
@@ -71,7 +85,7 @@ const HomeRoute = () => {
                 return (
                   <View key={item.id} style={styles.artBox}>
                     <CachedImage
-                      uri={Image.resolveAssetSource(assetMap[item.path]).uri}
+                      uri={getImageSource(assetMap[item.path])}
                       style={styles.artImage}
                       resizeMode="contain"
                     />
