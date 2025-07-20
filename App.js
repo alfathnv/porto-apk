@@ -32,7 +32,7 @@ const customDarkTheme = {
 };
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogout = () => setIsLoggedIn(false);
 
   function HomeStack({ handleLogout }) {
