@@ -5,7 +5,6 @@ import AnimatedPressableBox from '../components/AnimatedPressableBox';
 import HomeHeader from '../components/HomeHeader';
 import CategoryFilter from '../components/CategoryFilter';
 import { dataContent, assetMap } from '../datas/contentList';
-import { Image as CachedImage } from "react-native-expo-image-cache";
 
 // Helper function to get image source that works on both native and web
 const getImageSource = (asset) => {
@@ -84,8 +83,8 @@ const HomeRoute = () => {
               if (item.isArtProject) {
                 return (
                   <View key={item.id} style={styles.artBox}>
-                    <CachedImage
-                      uri={getImageSource(assetMap[item.path])}
+                    <Image
+                      source={assetMap[item.path]}
                       style={styles.artImage}
                       resizeMode="contain"
                     />
