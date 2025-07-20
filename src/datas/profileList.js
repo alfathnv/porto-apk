@@ -7,6 +7,7 @@ export const personalData = {
   phone: '+62 81324327564',
   linkedin: 'https://linkedin.com/in/alfathnv',
   github: 'https://github.com/alfathnv',
+  resume: 'https://drive.google.com/file/d/1UwamTC7nV3Y-wGJ-tchewxFpgsSyIu37/view?usp=sharing',
   about: `I'm a Full-Stack Developer with experience in web and game development. I love solving problems, building user-friendly interfaces, and working across the stack from frontend UI to backend systems and infrastructure.
 
 I adapt quickly, enjoy learning new technologies, and take ownership of the projects I'm involved in. Beyond just writing code, I care about creating real impact through products that work well and scale effectively.

@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, Image, Platform } from 'react-native';
-import { Text, useTheme } from 'react-native-paper';
+import { Text, useTheme, Button } from 'react-native-paper';
 
 const InfoCard = ({ personalData }) => {
   const theme = useTheme();
   
   // Use fixed sizes for better consistency across platforms
-  const photoSize = Platform.OS === 'web' ? 120 : containerWidth * 0.3;
+  const photoSize = Platform.OS === 'web' ? 120 : 96;
   const nameFontSize = Platform.OS === 'web' ? 20 : Math.max(photoSize * 0.15, 18);
   const titleFontSize = Platform.OS === 'web' ? 16 : Math.max(photoSize * 0.12, 14);
   const locationFontSize = Platform.OS === 'web' ? 14 : Math.max(photoSize * 0.1, 12);
@@ -30,6 +30,25 @@ const InfoCard = ({ personalData }) => {
         <Text style={[styles.location, { color: theme.colors.onSurfaceVariant, fontSize: locationFontSize }]}>
           📍 {personalData.location}
         </Text>
+        {personalData.resume && (
+          <Button
+            mode="outlined"
+            icon="file-document-outline"
+            style={{ marginTop: 8, alignSelf: 'flex-start' }}
+            labelStyle={{ fontSize: 14 }}
+            onPress={() => {
+              // Open link in browser (universal for web/native)
+              const url = personalData.resume;
+              if (Platform.OS === 'web') {
+                window.open(url, '_blank');
+              } else {
+                import('react-native').then(({ Linking }) => Linking.openURL(url));
+              }
+            }}
+          >
+            Lihat Resume / CV
+          </Button>
+        )}
       </View>
     </View>
   );
