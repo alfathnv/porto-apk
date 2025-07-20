@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider as PaperProvider, MD3DarkTheme, IconButton } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { View, StyleSheet, Platform } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import ContentDetailScreen from './src/screens/ContentDetailScreen';
 import SocialsScreen from './src/screens/SocialScreen';
@@ -97,7 +98,9 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <PaperProvider theme={customDarkTheme}>
-          <LoginScreen onLogin={() => setIsLoggedIn(true)} />
+          <View style={styles.appContainer}>
+            <LoginScreen onLogin={() => setIsLoggedIn(true)} />
+          </View>
         </PaperProvider>
       </SafeAreaProvider>
     );
@@ -106,32 +109,60 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <PaperProvider theme={customDarkTheme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              headerShown: false,
-              tabBarStyle: { backgroundColor: '#2a2b2b', borderTopColor: '#232323' },
-              tabBarActiveTintColor: '#90caf9',
-              tabBarInactiveTintColor: '#888',
-              tabBarIcon: ({ color, size }) => {
-                let iconName;
-                if (route.name === 'HomeTab') iconName = 'home-variant';
-                else if (route.name === 'SocialsTab') iconName = 'web';
-                else if (route.name === 'ProfileTab') iconName = 'account';
-                else iconName = 'help';
-                return <MaterialCommunityIcons name={iconName} color={color} size={size} />;
-              },
-            })}
-          >
-            <Tab.Screen name="HomeTab" options={{ title: 'Home' }}>
-              {() => <HomeStack handleLogout={handleLogout} />}
-            </Tab.Screen>
-            <Tab.Screen name="SocialsTab" component={SocialsStack} options={{ title: 'Socials' }} />
-            <Tab.Screen name="ProfileTab" component={ProfileStack} options={{ title: 'Profile' }} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <View style={styles.appContainer}>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={({ route }) => ({
+                headerShown: false,
+                tabBarStyle: { 
+                  backgroundColor: '#2a2b2b', 
+                  borderTopColor: '#232323',
+                  ...(Platform.OS === 'web' && {
+                    maxWidth: 480,
+                    alignSelf: 'center',
+                    width: '100%',
+                    position: 'fixed',
+                    bottom: 0,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                  }),
+                },
+                tabBarActiveTintColor: '#90caf9',
+                tabBarInactiveTintColor: '#888',
+                tabBarIcon: ({ color, size }) => {
+                  let iconName;
+                  if (route.name === 'HomeTab') iconName = 'home-variant';
+                  else if (route.name === 'SocialsTab') iconName = 'web';
+                  else if (route.name === 'ProfileTab') iconName = 'account';
+                  else iconName = 'help';
+                  return <MaterialCommunityIcons name={iconName} color={color} size={size} />;
+                },
+              })}
+            >
+              <Tab.Screen name="HomeTab" options={{ title: 'Home' }}>
+                {() => <HomeStack handleLogout={handleLogout} />}
+              </Tab.Screen>
+              <Tab.Screen name="SocialsTab" component={SocialsStack} options={{ title: 'Socials' }} />
+              <Tab.Screen name="ProfileTab" component={ProfileStack} options={{ title: 'Profile' }} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </View>
       </PaperProvider>
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  appContainer: {
+    flex: 1,
+    backgroundColor: '#222323',
+    ...(Platform.OS === 'web' && {
+      maxWidth: 480,
+      alignSelf: 'center',
+      width: '100%',
+      minHeight: '100vh',
+      boxShadow: '0 0 20px rgba(0,0,0,0.3)',
+    }),
+  },
+});
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Platform } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { personalData, skills, education } from '../datas/profileList';
 import InfoCard from '../components/InfoCard';
@@ -13,12 +13,14 @@ const ProfileScreen = () => {
 
   return (
     <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <InfoCard personalData={personalData} />
-      <ContactCard personalData={personalData} />
-      <AboutCard personalData={personalData} />
-      <SkillCard skills={skills} />
-      <EducationCard education={education} />
-      <View style={styles.bottomSpacing} />
+      <View style={styles.contentContainer}>
+        <InfoCard personalData={personalData} />
+        <ContactCard personalData={personalData} />
+        <AboutCard personalData={personalData} />
+        <SkillCard skills={skills} />
+        <EducationCard education={education} />
+        <View style={styles.bottomSpacing} />
+      </View>
     </ScrollView>
   );
 };
@@ -27,6 +29,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+  },
+  contentContainer: {
+    ...(Platform.OS === 'web' && {
+      maxWidth: 480,
+      alignSelf: 'center',
+      width: '100%',
+    }),
   },
   bottomSpacing: {
     height: 32,

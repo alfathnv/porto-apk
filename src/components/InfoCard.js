@@ -1,18 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, Image, useWindowDimensions } from 'react-native';
+import { View, StyleSheet, Image, Platform } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 
 const InfoCard = ({ personalData }) => {
   const theme = useTheme();
-  const { width } = useWindowDimensions();
   
-  const containerWidth = width - 32; // Account for padding
-  const photoSize = containerWidth * 0.3; // 30% of container width
-  const infoWidth = containerWidth * 0.7; // 70% of container width
-  
-  const nameFontSize = Math.max(photoSize * 0.15, 18);
-  const titleFontSize = Math.max(photoSize * 0.12, 14);
-  const locationFontSize = Math.max(photoSize * 0.1, 12);
+  // Use fixed sizes for better consistency across platforms
+  const photoSize = Platform.OS === 'web' ? 120 : containerWidth * 0.3;
+  const nameFontSize = Platform.OS === 'web' ? 20 : Math.max(photoSize * 0.15, 18);
+  const titleFontSize = Platform.OS === 'web' ? 16 : Math.max(photoSize * 0.12, 14);
+  const locationFontSize = Platform.OS === 'web' ? 14 : Math.max(photoSize * 0.1, 12);
 
   return (
     <View style={styles.header}>
@@ -20,7 +17,7 @@ const InfoCard = ({ personalData }) => {
         source={require('../../assets/photo.jpeg')}
         style={[styles.profileImage, { width: photoSize, height: photoSize, borderRadius: photoSize / 2 }]}
       />
-      <View style={[styles.headerInfo, { width: infoWidth }]}>
+      <View style={styles.headerInfo}>
         <Text style={[styles.name, { color: theme.colors.onBackground, fontSize: nameFontSize }]}>
           {personalData.name}
         </Text>
