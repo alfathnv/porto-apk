@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Animated, Pressable, StyleSheet, Text } from 'react-native';
+import { View, Animated, Pressable, StyleSheet, Text, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const BlurredPressableBox = ({ image, title, subtitle, devLabel = 'Coming Soon', id, disableNavigate = false }) => {
@@ -112,6 +112,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
     overflow: 'hidden',
+    ...(Platform.OS === 'web' && {
+      maxWidth: 400,
+    }),
   },
   contentImage: {
     width: '100%',

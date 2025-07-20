@@ -48,6 +48,9 @@ const styles = StyleSheet.create({
   outerContainer: {
     width: '100%',
     alignItems: 'center',
+    ...(Platform.OS === 'web' && {
+      maxWidth: 500,
+    }),
   },
   overlayTextContainer: {
     position: 'absolute',

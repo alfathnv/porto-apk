@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, StyleSheet, Pressable, Animated } from 'react-native';
+import { View, StyleSheet, Pressable, Animated, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const AnimatedPressableBox = ({ image, title, subtitle, id }) => {
@@ -109,6 +109,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 3,
     elevation: 3,
+    ...(Platform.OS === 'web' && {
+      maxWidth: 400,
+    }),
   },
   contentImage: {
     width: '100%',

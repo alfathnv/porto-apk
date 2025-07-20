@@ -139,12 +139,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     paddingHorizontal: 24,
+    ...(Platform.OS === 'web' && {
+      maxWidth: 480,
+      alignSelf: 'center',
+      width: '100%',
+    }),
   },
   innerContentWrapper: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    ...(Platform.OS === 'web' && {
+      maxWidth: 500,
+    }),
   },
   modalContainer: {
     flex: 1,

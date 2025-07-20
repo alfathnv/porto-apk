@@ -144,6 +144,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 24,
+    ...(Platform.OS === 'web' && {
+      maxWidth: 480,
+      alignSelf: 'center',
+      width: '100%',
+    }),
   },
   landingImageInScroll: {
     width: '100%',
@@ -175,6 +180,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 3,
     elevation: 3,
+    ...(Platform.OS === 'web' && {
+      maxWidth: 400,
+    }),
   },
   artImage: {
     width: '100%',
